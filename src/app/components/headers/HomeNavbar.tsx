@@ -48,11 +48,11 @@ export default function HomeNavbar(props: HomeNavbarProps) {
     handleLogoutRequest,
   } = props;
   const { authMember } = useGlobals();
-  const [showTopAdd, setShowTopAdd] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowTopAdd(window.scrollY < 42);
+      setScrollY(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -91,9 +91,11 @@ export default function HomeNavbar(props: HomeNavbarProps) {
           className="navbar-cover"
           sx={{
             position: "fixed",
-            top: showTopAdd ? "42px" : "0px",
+            // top: showTopAdd ? 0 : "42px",
             left: 0,
-            transition: "transform 0.1s ease-in-out, top 0.1s ease-in-out",
+            width: "100%",
+            zIndex: 1000,
+            transform: `translateY(${Math.max(42 - scrollY, 0)}px)`,
           }}
         >
           <Box
