@@ -53,7 +53,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
             <NavLink to="/">
               <img
                 width={"100px"}
-                src={"/icons/amaya.svg"}
+                src={"/img/amaya-logo.png"}
                 className="brand-logo"
               />
             </NavLink>

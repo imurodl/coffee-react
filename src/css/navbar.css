@@ -1,35 +1,82 @@
 .home-navbar {
   width: 100%;
-  height: 773px;
+  height: 860px;
   display: flex;
-  background: url("/public/img/amaya-banner.jpg");
+  background: url("/public/img/amaya-banner.png") lightgray 0px 0px / 100% 100%
+    no-repeat;
   background-size: cover;
 }
 
 .home-navbar .navbar-container {
-  margin-top: 35px;
+  /* margin-top: 35px; */
+  width: 100%;
   height: 642px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.home-navbar .top-add {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: #242434;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-navbar .top-add .top-add-content {
+  min-width: 1300px;
+  height: 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-navbar .top-add .top-add-content .top-content-text {
+  color: #fff;
+  font-family: "Raleway";
+  font-size: 11.9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29.75px; /* 250% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.home-navbar .navbar-cover {
+  width: 100%;
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 24px 0px rgba(10, 10, 20, 0.06);
 }
 
 .home-navbar .navbar-container .menu {
+  min-width: 1300px;
   height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  z-index: 10000;
 }
 
-.home-navbar .navbar-container .menu .links {
-  min-width: 700px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.home-navbar .navbar-container .menu .links .login-button {
-  background: #3776cc;
-  color: #f8f8ff;
+.home-navbar .navbar-container .menu .login-button {
+  border: 2px solid #db9457;
+  padding: 13px 37.695px 14.75px 38px;
+  background: #fff;
+  color: #666;
+  text-align: center;
+  font-family: "Raleway";
+  font-size: 13.6px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29.75px; /* 218.75% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .home-navbar .navbar-container .menu .user-avatar {
@@ -43,7 +90,15 @@
 }
 
 .home-navbar .hover-line a {
-  color: #f8f8ff;
+  color: #101020;
+  text-align: center;
+  font-family: "Raleway";
+  font-size: 12.9px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 29.75px; /* 250% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
   z-index: 100;
 }
 
@@ -70,54 +125,57 @@
 }
 
 .home-navbar .navbar-container .header-frame {
-  margin-top: 142px;
-  height: 462px;
+  margin-top: 134px;
+  width: 100%;
+  height: 637px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .home-navbar .navbar-container .header-frame .detail {
-  width: 510px;
+  width: 550px;
   display: flex;
   flex-direction: column;
 }
 
-.home-navbar .navbar-container .header-frame .detail .head-main-txt {
-  width: 450px;
-  height: 150px;
-  font-family: "Roboto Serif";
-  font-size: 50px;
+.home-navbar .navbar-container .header-frame .detail .service-txt {
+  margin-top: 60px;
+  color: #db9457;
+  font-family: "Raleway";
+  font-size: 13.6px;
   font-style: normal;
   font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.75px;
-  color: #f8f8ff;
+  line-height: 23.8px; /* 175% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.home-navbar .navbar-container .header-frame .detail .head-main-txt {
+  width: 423.035px;
+  margin-top: 8px;
+  color: #101020;
+  font-family: "Playfair Display";
+  font-size: 53.1px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 58.44px; /* 110.056% */
+}
+
+.home-navbar .navbar-container .header-frame .detail .dBaWmh {
+  margin-top: 20px;
+  width: 40px;
 }
 
 .home-navbar .navbar-container .header-frame .detail .wel-txt {
-  width: 510;
-  height: 42px;
-  font-family: "Roboto Serif";
-  font-size: 36px;
+  margin-top: 44px;
+  width: 460.51px;
+  color: #3a3a3b;
+  font-family: Raleway;
+  font-size: 17px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.54px;
-  color: #d7b686;
-}
-
-.home-navbar .navbar-container .header-frame .detail .service-txt {
-  margin-top: 23px;
-  width: 153;
-  height: 23px;
-  font-family: "Roboto Serif";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.3px;
-  color: #d5d5d5;
+  line-height: 29.75px; /* 175% */
 }
 
 .home-navbar .navbar-container .header-frame .detail .signup {
@@ -127,31 +185,23 @@
 .home-navbar .navbar-container .header-frame .detail .signup .signup-button {
   width: 210px;
   height: 60px;
-  border-radius: 4px;
-  background: #1976d2;
+  border: 2px solid #db9457;
+  padding: 13px 37.695px 14.75px 38px;
+  background: white;
+  color: #666;
   text-align: center;
-  text-transform: uppercase;
-  font-family: Poppins;
-  font-size: 17px;
+  font-family: Raleway;
+  font-size: 13.6px;
   font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  color: #f8f8ff;
+  font-weight: 500;
+  line-height: 29.75px; /* 218.75% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.home-navbar .navbar-container .logo-frame {
-  margin-top: 43px;
-  width: 690px;
-  height: 419px;
-}
-
-.home-navbar .navbar-container .logo-frame .logo-img {
-  width: 100%;
-  height: 100%;
-  background: url("/public/img/logo.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
-  filter: invert(25%);
+.signup-button:hover {
+  background: #db9457;
+  color: #fff;
 }
 
 .other-navbar {
@@ -187,9 +237,17 @@
   align-items: center;
 }
 
-.other-navbar .navbar-container .menu .links .login-button {
-  background: #3776cc;
-  color: #f8f8ff;
+.other-navbar .navbar-container .menu .login-button {
+  padding: 13px 37.695px 14.75px 38px;
+  color: #666;
+  text-align: center;
+  font-family: "Raleway";
+  font-size: 13.6px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29.75px; /* 218.75% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .other-navbar .navbar-container .menu .user-avatar {

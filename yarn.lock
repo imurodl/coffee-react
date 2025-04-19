@@ -1630,6 +1630,16 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.9.tgz#50dea3616bc8191fb8e112283b49eaff03e78429"
   integrity sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==
 
+"@fontsource/playfair-display@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/playfair-display/-/playfair-display-5.2.5.tgz#d7251227c149fde4db7dfd4382450040948328e9"
+  integrity sha512-4PsPkErCP0M5TikYzdhPGaCAU09qFux9ZlrNFA89KTCdQcZKGV0LJXVOSX8UFuo9xEgdTmth+k+j2nQA761fTg==
+
+"@fontsource/raleway@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/raleway/-/raleway-5.2.5.tgz#4216a736650069e39398f7d8d67d91a9ac898cc6"
+  integrity sha512-gVFV8Yi8Y5h8sQw0U/F6TQID53DVIWPuRxqBLOBxwLbQma42JAwqTZ+pi3eDjpm20/rjS2XoVJH5hnMx1KFB+g==
+
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.14"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.14.tgz#d78e481a039f7566ecc9660b4ea7fe6b1fec442b"
