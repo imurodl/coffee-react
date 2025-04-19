@@ -54,8 +54,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0px 24px 0px rgba(10, 10, 20, 0.06);
+  z-index: 99999999;
 }
 
 .home-navbar .navbar-container .menu {
@@ -65,6 +66,7 @@
 }
 
 .home-navbar .navbar-container .menu .login-button {
+  height: 44px;
   border: 2px solid #db9457;
   padding: 13px 37.695px 14.75px 38px;
   background: #fff;
@@ -105,7 +107,7 @@
 .home-navbar .underline {
   display: block;
   content: "";
-  border-bottom: solid 2px #d7b686;
+  border-bottom: solid 2px #db9457;
 }
 
 .home-navbar .hover-line:after {
@@ -224,11 +226,6 @@
   align-items: center;
 }
 
-.other-navbar .navbar-container .menu .brand-logo {
-  /* width: 125px;
-  height: 30px; */
-}
-
 .other-navbar .navbar-container .menu .links {
   min-width: 700px;
   display: flex;
@@ -268,7 +265,7 @@
 .other-navbar .underline {
   display: block;
   content: "";
-  border-bottom: solid 2px #d7b686;
+  border-bottom: solid 2px #db9457;
 }
 
 .other-navbar .hover-line:after {
