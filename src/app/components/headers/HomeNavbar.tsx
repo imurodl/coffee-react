@@ -64,18 +64,18 @@ export default function HomeNavbar(props: HomeNavbarProps) {
       <Container className="navbar-container">
         <Stack className="top-add">
           <Box className={"top-add-content"}>
-            <Box sx={{ width: "33%" }} />
+            <Box sx={{ width: "32%" }} />
 
             <Box
               className="top-content-text"
-              sx={{ width: "33%", textAlign: "center" }}
+              sx={{ width: "32%", textAlign: "center" }}
             >
               Free shipping on orders of $35+
             </Box>
 
             <Box
               sx={{
-                width: "33%",
+                width: "32%",
                 display: "flex",
                 justifyContent: "flex-end",
                 gap: 1,

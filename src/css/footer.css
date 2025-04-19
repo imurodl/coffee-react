@@ -1,94 +1,83 @@
-.foot-desc-txt {
-  margin-top: 22px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 34px;
-  color: #e3c08d;
-}
-
-.sns-context {
-  margin-top: 17px;
-  width: 137px;
+.footer-table {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.foot-category-title {
-  width: 106px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 34px;
-  color: #c5c8c9;
-}
-
-.foot-category-link {
-  margin-top: 20px;
-  height: 170px;
+  width: 100%;
   display: flex;
+  width: 1248px;
+  height: 245.73px;
+  padding: 48px 60px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 72px;
+}
+
+.footer-table .table {
+  display: flex;
+  width: 352px;
+  height: 149.73px;
   flex-direction: column;
   justify-content: space-between;
-  height: 170px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 34px;
+  align-items: center;
+  gap: 11.99px;
 }
 
-.foot-category-link a {
-  color: #e3c08d;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.find-us {
+.footer-taable .table-last {
   display: flex;
-  flex-direction: row;
+  width: 352px;
+  height: 88.61px;
+  padding-bottom: 0.01px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 11.99px;
 }
 
-.find-us span {
-  font-family: "Poppins";
+.footer-table .table .table-list-head {
+  color: #fff;
+  text-align: center;
+  font-family: "Raleway";
+  font-size: 15.3px;
   font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 34px;
-  color: #c5c8c9;
+  font-weight: 600;
+  line-height: 15.3px; /* 100% */
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.find-us div {
-  margin-left: 10px;
-  font-family: "Poppins";
+.footer-table .table .table-list {
+  display: flex;
+  width: 352px;
+  height: 110.44px;
+  padding: 10px 106.11px 11.81px 106.09px;
+  flex-direction: column;
+  align-items: center;
+  gap: 21.82px;
+}
+
+.footer-table .table .table-list div {
+  color: #fff;
+  text-align: center;
+  font-family: Raleway;
+  font-size: 12.4px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24.82px; /* 200.161% */
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.footer-foot {
+  width: 100%;
+  height: 87.98px;
+  align-items: center;
+}
+
+.footer-foot div p {
+  color: #fff;
+  font-family: "Raleway";
+  font-size: 10.2px;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 34px;
-  color: #e3c08d;
-}
-
-.copyright-txt {
-  margin-top: 17px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 34px;
-  color: #e3c08d;
-}
-
-.foot-category-title:after {
-  display: block;
-  content: "";
-  border-bottom: solid 2px #d7b686;
-  transform: scaleX(0);
-  transition: transform 250ms ease-in-out;
-  transform-origin: 0% 50%;
-}
-
-.foot-category-title:hover:after {
-  transform: scaleX(1);
+  line-height: 17.85px; /* 175% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }

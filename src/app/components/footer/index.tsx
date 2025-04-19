@@ -1,13 +1,17 @@
 import React from "react";
-import { Box, Container, Stack } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 const Footers = styled.div`
   width: 100%;
-  height: 590px;
+  height: auto;
   display: flex;
-  background: #343434;
+  flex-direction: column;
+  background: #101020;
   background-size: cover;
 `;
 
@@ -17,71 +21,62 @@ export default function Footer() {
   return (
     <Footers>
       <Container>
-        <Stack flexDirection={"row"} sx={{ mt: "94px" }}>
-          <Stack flexDirection={"column"} style={{ width: "340px" }}>
-            <Box>
-              <img width={"100px"} src={"/img/amaya-logo.png"} />
-            </Box>
-            <Box className={"foot-desc-txt"}>
-              Focusing on the gourmet Turkish breakfast as well as the youth
-              society, CZN Burak Gurme aims to bring Turkish cuisine back. CZN
-              Burak Gurme creates an illusion with its cuisine.
-            </Box>
-            <Box className="sns-context">
-              <img src={"/icons/facebook.svg"} />
-              <img src={"/icons/twitter.svg"} />
-              <img src={"/icons/instagram.svg"} />
-              <img src={"/icons/youtube.svg"} />
-            </Box>
-          </Stack>
-          <Stack sx={{ ml: "288px" }} flexDirection={"row"}>
-            <Stack>
-              <Box>
-                <Box className={"foot-category-title"}>Bo'limlar</Box>
-                <Box className={"foot-category-link"}>
-                  <Link to="/">Home</Link>
-                  <Link to="/products">Products</Link>
-                  {authMember && <Link to="/orders">Orders</Link>}
-                  <Link to="/help">Help</Link>
-                </Box>
-              </Box>
+        <Stack className="footer-table" flexDirection={"row"}>
+          <Stack className="table">
+            <Typography className="table-list-head">about</Typography>
+            <Stack className="table-list">
+              <div>The Company</div>
+              <div>Faq</div>
+              <div>Privacy Policy</div>
             </Stack>
-            <Stack sx={{ ml: "100px" }}>
-              <Box>
-                <Box className={"foot-category-title"}>Find us</Box>
-                <Box
-                  flexDirection={"column"}
-                  sx={{ mt: "20px" }}
-                  className={"foot-category-link"}
-                  justifyContent={"space-between"}
-                >
-                  <Box flexDirection={"row"} className={"find-us"}>
-                    <span>L.</span>
-                    <div>Downtown, Dubai</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>P.</span>
-                    <div>+971 4 554 7777</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>E.</span>
-                    <div>devexuz@gmail.com</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>H.</span>
-                    <div>Visit 24 hours</div>
-                  </Box>
-                </Box>
-              </Box>
+          </Stack>
+          <Stack className="table">
+            <Typography className="table-list-head">about</Typography>
+            <Stack className="table-list">
+              <div>The Company</div>
+              <div>Faq</div>
+              <div>Privacy Policy</div>
+            </Stack>
+          </Stack>
+          <Stack className="table table-last">
+            <Typography className="table-list-head">about</Typography>
+            <Stack
+              flexDirection={"row"}
+              paddingBottom={"30px"}
+              gap={"24px"}
+              width={"352px"}
+              justifyContent={"center"}
+            >
+              <FacebookIcon sx={{ color: "#fff" }} />
+              <InstagramIcon sx={{ color: "#fff" }} />
+              <TelegramIcon sx={{ color: "#fff" }} />
             </Stack>
           </Stack>
         </Stack>
-        <Stack
-          style={{ border: "1px solid #C5C8C9", width: "100%", opacity: "0.2" }}
-          sx={{ mt: "80px" }}
-        ></Stack>
-        <Stack className={"copyright-txt"}>
-          © Copyright Devex Global, All rights reserved.
+        <Stack className="footer-foot" flexDirection={'row'}>
+          <Box sx={{ width: "33%" }} component={"div"}>
+            <Typography component={"p"}>
+              © 2020 amaya. All Rights Reserved.
+            </Typography>
+          </Box>
+          <Box sx={{ width: "33%", textAlign: "center" }}>
+            <img
+              src="/img/amaya-white.png"
+              alt=""
+              style={{ width: "96.36px" }}
+            />
+          </Box>
+          <Box
+            sx={{
+              width: "33%",
+              display: "flex",
+              justifyContent: "flex-end",
+              flexDirection: "row",
+            }}
+            component={"div"}
+          >
+            <Typography component={"p"}>because we love coffee</Typography>
+          </Box>
         </Stack>
       </Container>
     </Footers>
