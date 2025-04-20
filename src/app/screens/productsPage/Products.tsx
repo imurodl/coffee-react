@@ -40,7 +40,7 @@ export default function Products(props: ProductProps) {
     page: 1,
     limit: 8,
     order: "createdAt",
-    productCollection: ProductCollection.DISH,
+    productCollection: ProductCollection.WHOLE_BEAN,
     search: "",
   });
   const [searchText, setSearchText] = useState<string>("");
@@ -177,12 +177,13 @@ export default function Products(props: ProductProps) {
                 <Button
                   variant="contained"
                   color={
-                    productSearch.productCollection === ProductCollection.DESERT
+                    productSearch.productCollection ===
+                    ProductCollection.INSTANT
                       ? "primary"
                       : "secondary"
                   }
                   onClick={() =>
-                    searchCollectionHandler(ProductCollection.DESERT)
+                    searchCollectionHandler(ProductCollection.INSTANT)
                   }
                 >
                   Dessert
@@ -203,12 +204,12 @@ export default function Products(props: ProductProps) {
                 <Button
                   variant="contained"
                   color={
-                    productSearch.productCollection === ProductCollection.SALAD
+                    productSearch.productCollection === ProductCollection.DECAF
                       ? "primary"
                       : "secondary"
                   }
                   onClick={() =>
-                    searchCollectionHandler(ProductCollection.SALAD)
+                    searchCollectionHandler(ProductCollection.DECAF)
                   }
                 >
                   Salad
@@ -216,12 +217,26 @@ export default function Products(props: ProductProps) {
                 <Button
                   variant="contained"
                   color={
-                    productSearch.productCollection === ProductCollection.DISH
+                    productSearch.productCollection ===
+                    ProductCollection.WHOLE_BEAN
                       ? "primary"
                       : "secondary"
                   }
                   onClick={() =>
-                    searchCollectionHandler(ProductCollection.DISH)
+                    searchCollectionHandler(ProductCollection.WHOLE_BEAN)
+                  }
+                >
+                  Dish
+                </Button>
+                <Button
+                  variant="contained"
+                  color={
+                    productSearch.productCollection === ProductCollection.GROUND
+                      ? "primary"
+                      : "secondary"
+                  }
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.GROUND)
                   }
                 >
                   Dish

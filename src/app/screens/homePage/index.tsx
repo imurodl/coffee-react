@@ -36,7 +36,7 @@ export default function HomePage() {
         page: 1,
         limit: 4,
         order: "productViews",
-        productCollection: ProductCollection.DISH,
+        productCollection: ProductCollection.WHOLE_BEAN,
       })
       .then((data) => {
         setPopularDishes(data);

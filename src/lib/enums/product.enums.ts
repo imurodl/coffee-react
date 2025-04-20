@@ -1,8 +1,7 @@
 export enum ProductSize {
-  SMALL = "SMALL",
-  NORMAL = "NORMAL",
-  LARGE = "LARGE",
-  SET = "SET",
+  SMALL = "300g",
+  MEDIUM = "500g",
+  LARGE = "800g",
 }
 
 export enum ProductVolume {
@@ -20,9 +19,11 @@ export enum ProductStatus {
 }
 
 export enum ProductCollection {
-  DISH = "DISH",
-  SALAD = "SALAD",
-  DESERT = "DESERT",
-  DRINK = "DRINK",
-  OTHER = "OTHER",
+  WHOLE_BEAN = "WHOLE_BEAN",      // for people who grind at home
+  GROUND = "GROUND",              // pre-ground coffee
+  DECAF = "DECAF",                // decaffeinated, any form
+  COLD_BREW = "COLD_BREW",        // bottled or canned cold brew
+  INSTANT = "INSTANT",            // soluble coffee
+  DRINK = "DRINK",                // ready-to-drink (latte, etc)
+  OTHER = "OTHER",                // merch, bundles, etc.
 }
