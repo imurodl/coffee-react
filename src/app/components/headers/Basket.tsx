@@ -114,7 +114,7 @@ export default function Basket(props: BasketProps) {
             {cartItems.length === 0 ? (
               <div>Cart is empty!</div>
             ) : (
-              <Stack flexDirection={"row"}>
+              <Stack flexDirection={"row"} justifyContent={"space-between"}>
                 <div>Cart Products:</div>
                 <DeleteForeverIcon
                   onClick={onDeleteAll}
