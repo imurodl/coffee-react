@@ -133,6 +133,22 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
+}
+
+.home-navbar .navbar-container .header-frame .horizontal-text {
+  /* width: 111.372px;
+  height: 16px; */
+  transform: rotate(-90deg);
+  color: #3a3a3b;
+  text-align: center;
+  font-family: Raleway;
+  font-size: 13.6px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29.75px; /* 218.75% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .home-navbar .navbar-container .header-frame .detail {

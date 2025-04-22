@@ -6,6 +6,7 @@ import {
   Menu,
   MenuItem,
   Stack,
+  Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
@@ -243,6 +244,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
           </Box>
         </Stack>
         <Stack className="header-frame">
+          <Typography className="horizontal-text">our mission</Typography>
           <Stack className="detail">
             <Box className="service-txt">exceptional quality</Box>
             <Box className="head-main-txt">
