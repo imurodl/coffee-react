@@ -21,7 +21,6 @@ export enum ProductStatus {
 export enum ProductCollection {
   WHOLE_BEAN = "WHOLE_BEAN",      // for people who grind at home
   GROUND = "GROUND",              // pre-ground coffee
-  DECAF = "DECAF",                // decaffeinated, any form
   COLD_BREW = "COLD_BREW",        // bottled or canned cold brew
   INSTANT = "INSTANT",            // soluble coffee
   DRINK = "DRINK",                // ready-to-drink (latte, etc)

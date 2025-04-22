@@ -27,7 +27,9 @@ export default function NewDishes() {
     <div className="new-products-frame">
       <Container>
         <Stack className="main">
-          <Box className="category-title">Fresh Menu</Box>
+          <Typography className="info-subt">fresh menu</Typography>
+          <Typography className="info-title">Now Roasting</Typography>
+          <Divider width="2" height="40" bg="#DB9457" />
           <Stack className="cards-frame">
             <CssVarsProvider>
               {newDishes.length !== 0 ? (

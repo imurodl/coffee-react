@@ -14,6 +14,7 @@ import { createSelector } from "reselect";
 import { retrievePopularDishes } from "./selector";
 import { serverApi } from "../../../lib/config";
 import { Product } from "../../../lib/types/product";
+import Divider from "../../components/divider";
 
 /** REDUC SLICE & SELECTOR */
 const popularDishesRetriever = createSelector(
@@ -28,7 +29,9 @@ export default function PopularDishes() {
     <div className="popular-dishes-frame">
       <Container>
         <Stack className="popular-section">
-          <Box className="category-title">Popular Dishes</Box>
+          <Typography className="info-subt">spotlight</Typography>
+          <Typography className="info-title">Popular Products</Typography>
+          <Divider width="2" height="40" bg="#DB9457" />
           <Stack className="cards-frame">
             <CssVarsProvider>
               {popularDishes.length !== 0 ? (

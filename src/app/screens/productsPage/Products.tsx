@@ -204,19 +204,6 @@ export default function Products(props: ProductProps) {
                 <Button
                   variant="contained"
                   color={
-                    productSearch.productCollection === ProductCollection.DECAF
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.DECAF)
-                  }
-                >
-                  Salad
-                </Button>
-                <Button
-                  variant="contained"
-                  color={
                     productSearch.productCollection ===
                     ProductCollection.WHOLE_BEAN
                       ? "primary"
