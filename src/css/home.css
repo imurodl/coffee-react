@@ -251,6 +251,7 @@
 /* NEW PRODUCTS */
 
 .homepage .new-products-frame {
+  margin-bottom: 60px;
   width: 100%;
   height: auto;
   display: flex;
@@ -312,15 +313,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ff9200;
+  background: #242434;
   box-shadow: 4px, 6px, 20px, rgba(0, 0, 0, 0.1);
   border-radius: 25px;
-  font-family: "Poppins";
+  color: #db9457;
+  text-align: center;
+  font-family: Arial;
+  font-size: 10px;
   font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 21px;
-  color: #f8f8ff;
+  font-weight: 400;
+  line-height: 29.75px; /* 218.75% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .homepage .new-products-frame .product-detail {
@@ -331,7 +335,7 @@
   margin-top: -12px;
   border-top: 1px solid;
   border-color: #f8f8ff;
-  background-color: #fafbfb;
+  background-color: #242434;
 }
 
 .homepage .new-products-frame .product-detail .info {
@@ -343,14 +347,28 @@
 }
 
 .homepage .new-products-frame .product-detail .title {
-  width: 65px;
+  width: 165px;
   font-weight: 500;
+  color: #fff;
+  text-align: center;
+  font-family: "Raleway";
+  font-size: 15.3px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26.78px;
 }
 
 .homepage .new-products-frame .product-detail .price {
   margin-left: 10px;
   width: 20px;
   font-weight: 500;
+  color: #fff;
+  text-align: center;
+  font-family: "Raleway";
+  font-size: 15.3px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26.78px;
 }
 
 .homepage .new-products-frame .product-detail .divider {
@@ -362,7 +380,13 @@
 .homepage .new-products-frame .product-detail .views {
   display: flex;
   align-items: center;
-  font-weight: 500;
+  color: #d9d9d9;
+  text-align: center;
+  font-family: "Raleway";
+  font-size: 14.3px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26.78px;
 }
 
 .homepage .new-products-frame .no-data {
@@ -462,6 +486,12 @@
   font-size: 30px;
   line-height: 34px;
   color: #e3c08d;
+}
+
+.homepage .cards-frame .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  /* transition: 1ms ease; */
 }
 
 /** EVENTS **/
