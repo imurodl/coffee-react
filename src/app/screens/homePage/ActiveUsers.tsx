@@ -10,6 +10,7 @@ import { createSelector } from "reselect";
 import { retrieveTopUsers } from "./selector";
 import { Member } from "../../../lib/types/member";
 import { serverApi } from "../../../lib/config";
+import Divider from "../../components/divider";
 
 /** REDUC SLICE & SELECTOR */
 const topUsersRetriever = createSelector(retrieveTopUsers, (topUsers) => ({
@@ -23,7 +24,9 @@ export default function ActiveUsers() {
     <div className="active-users-frame">
       <Container>
         <Stack className="main">
-          <Box className="category-title">Active Users</Box>
+          <Typography className="info-subt">Spotlight</Typography>
+          <Typography className="info-title">Active Users</Typography>
+          <Divider width="2" height="40" bg="#DB9457" />
           <Stack className="cards-frame">
             <CssVarsProvider>
               {topUsers.length !== 0 ? (
@@ -34,25 +37,30 @@ export default function ActiveUsers() {
                       key={member._id}
                       variant="outlined"
                       className="card"
-                      sx={{ justifyContent: "center", alignItems: "center" }}
+                      sx={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
                     >
                       <CardOverflow>
                         <AspectRatio ratio="1">
                           <img
                             src={imagePath}
                             alt={`${member.memberNick}'s photo`}
+                            style={{ width: "265.5px" }}
                           />
                         </AspectRatio>
                       </CardOverflow>
                       <CardOverflow
                         variant="soft"
-                        sx={{ background: "#f8f8ff", mt: "-12px" }}
+                        sx={{ background: "#fff", mt: "-12px" }}
                       >
                         <Stack
                           sx={{
                             height: "26px",
                             justifyContent: "center",
                             alignItems: "center",
+                            mt: "12px",
                           }}
                         >
                           <Typography className="member-nickname">
