@@ -10,6 +10,7 @@ import theme from "./app/MaterialTheme";
 import "./css/index.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import ContextProvider from "./app/context/ContextProvider";
+import ScrollToTop from "./app/components/headers/ScrollToTop";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -21,6 +22,7 @@ root.render(
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <BrowserRouter>
+            <ScrollToTop />
             <App />
           </BrowserRouter>
         </ThemeProvider>

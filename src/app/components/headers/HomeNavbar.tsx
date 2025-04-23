@@ -56,6 +56,8 @@ export default function HomeNavbar(props: HomeNavbarProps) {
       setScrollY(window.scrollY);
     };
 
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
