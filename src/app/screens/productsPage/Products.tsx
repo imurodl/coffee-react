@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 /** REDUC SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -40,9 +41,10 @@ export default function Products(props: ProductProps) {
     page: 1,
     limit: 8,
     order: "createdAt",
-    productCollection: ProductCollection.WHOLE_BEAN,
     search: "",
   });
+  const [productCollectionStyle, setProductCollectionStyle] =
+    useState<ProductCollection>();
   const [searchText, setSearchText] = useState<string>("");
   const history = useHistory();
 
@@ -63,9 +65,16 @@ export default function Products(props: ProductProps) {
 
   /** HANDLERS */
 
+  const searchAllHandler = () => {
+    productSearch.page = 1;
+    delete productSearch.productCollection;
+    setProductSearch({ ...productSearch });
+  };
+
   const searchCollectionHandler = (collection: ProductCollection) => {
     productSearch.page = 1;
     productSearch.productCollection = collection;
+    setProductCollectionStyle(productSearch.productCollection);
     setProductSearch({ ...productSearch });
   };
 
@@ -95,18 +104,42 @@ export default function Products(props: ProductProps) {
         <Stack alignItems={"center"}>
           <Stack className="avatar-big-box">
             <Stack className="top-text">
-              <Box className="top-text-title">Burak Restaurant</Box>
+              <Box className="top-text-title">shop</Box>
               <div className="spacer"></div>
-              <Stack className="search-bar">
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={2}
+                sx={{
+                  backgroundColor: "#fff",
+                  borderRadius: "30px",
+                  padding: "6px 12px",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                  width: "350px",
+                  maxWidth: "600px",
+                  mx: "auto",
+                }}
+                className="search-bar"
+              >
                 <input
-                  type={"search"}
-                  name={"singleSearch"}
-                  className={"search-input"}
-                  placeholder={"Type here"}
+                  type="search"
+                  name="singleSearch"
+                  className="search-input"
+                  placeholder="Type here..."
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key == "Enter") searchProductHandler();
+                    if (e.key === "Enter") searchProductHandler();
+                  }}
+                  style={{
+                    flex: 1,
+                    border: "none",
+                    outline: "none",
+                    backgroundColor: "transparent",
+                    fontSize: "16px",
+                    fontFamily: "Raleway",
+                    color: "#6F4E37",
+                    paddingLeft: "10px",
                   }}
                 />
                 <Button
@@ -114,8 +147,21 @@ export default function Products(props: ProductProps) {
                   variant="contained"
                   endIcon={<SearchIcon />}
                   onClick={searchProductHandler}
+                  sx={{
+                    border: "none",
+                    background: "#101020",
+                    color: "#db9457",
+                    borderRadius: "20px",
+                    textTransform: "none",
+                    fontWeight: 600,
+                    fontFamily: "Raleway",
+                    "&:hover": {
+                      background: "#DB9457",
+                      color: "#101020",
+                    },
+                  }}
                 >
-                  SEARCH
+                  Search
                 </Button>
               </Stack>
             </Stack>
@@ -163,70 +209,115 @@ export default function Products(props: ProductProps) {
               <div className="category-main">
                 <Button
                   variant="contained"
-                  color={
-                    productSearch.productCollection === ProductCollection.OTHER
-                      ? "primary"
-                      : "secondary"
+                  sx={{
+                    color: productSearch.productCollection ? "#666" : "#fff",
+                    background: productSearch.productCollection
+                      ? "#fff"
+                      : "#db9457",
+                  }}
+                  onClick={searchAllHandler}
+                >
+                  shop All
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    color:
+                      productSearch.productCollection ===
+                      ProductCollection.WHOLE_BEAN
+                        ? "#fff"
+                        : "#666",
+                    background:
+                      productSearch.productCollection ===
+                      ProductCollection.WHOLE_BEAN
+                        ? "#db9457"
+                        : "#fff",
+                  }}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.WHOLE_BEAN)
                   }
+                >
+                  WHOLE BEAN
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    color:
+                      productSearch.productCollection ===
+                      ProductCollection.GROUND
+                        ? "#fff"
+                        : "#666",
+                    background:
+                      productSearch.productCollection ===
+                      ProductCollection.GROUND
+                        ? "#db9457"
+                        : "#fff",
+                  }}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.GROUND)
+                  }
+                >
+                  GROUND
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    color:
+                      productSearch.productCollection ===
+                      ProductCollection.DRINK
+                        ? "#fff"
+                        : "#666",
+                    background:
+                      productSearch.productCollection ===
+                      ProductCollection.DRINK
+                        ? "#db9457"
+                        : "#fff",
+                  }}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.DRINK)
+                  }
+                >
+                  DRINK
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    color:
+                      productSearch.productCollection ===
+                      ProductCollection.INSTANT
+                        ? "#fff"
+                        : "#666",
+                    background:
+                      productSearch.productCollection ===
+                      ProductCollection.INSTANT
+                        ? "#db9457"
+                        : "#fff",
+                  }}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.INSTANT)
+                  }
+                >
+                  INSTANT
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    color:
+                      productSearch.productCollection ===
+                      ProductCollection.OTHER
+                        ? "#fff"
+                        : "#666",
+                    background:
+                      productSearch.productCollection ===
+                      ProductCollection.OTHER
+                        ? "#db9457"
+                        : "#fff",
+                  }}
                   onClick={() =>
                     searchCollectionHandler(ProductCollection.OTHER)
                   }
                 >
                   Other
-                </Button>
-                <Button
-                  variant="contained"
-                  color={
-                    productSearch.productCollection ===
-                    ProductCollection.INSTANT
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.INSTANT)
-                  }
-                >
-                  Dessert
-                </Button>
-                <Button
-                  variant="contained"
-                  color={
-                    productSearch.productCollection === ProductCollection.DRINK
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.DRINK)
-                  }
-                >
-                  Drink
-                </Button>
-                <Button
-                  variant="contained"
-                  color={
-                    productSearch.productCollection ===
-                    ProductCollection.WHOLE_BEAN
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.WHOLE_BEAN)
-                  }
-                >
-                  Dish
-                </Button>
-                <Button
-                  variant="contained"
-                  color={
-                    productSearch.productCollection === ProductCollection.GROUND
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.GROUND)
-                  }
-                >
-                  Dish
                 </Button>
               </div>
             </Stack>
@@ -267,11 +358,7 @@ export default function Products(props: ProductProps) {
                             e.stopPropagation();
                           }}
                         >
-                          <img
-                            src="/icons/shopping-cart.svg"
-                            alt=""
-                            style={{ display: "flex" }}
-                          />
+                          <ShoppingCartIcon />
                         </Button>
                         <Button className="view-btn" sx={{ right: "36px" }}>
                           <Badge
@@ -327,39 +414,6 @@ export default function Products(props: ProductProps) {
           </Stack>
         </Stack>
       </Container>
-      <div className="brands-logo">
-        <Container className="family-brands">
-          <Box className="category-title">our family brands</Box>
-          <Stack className="brand-list">
-            <Box className="review-box">
-              <img src="/img/gurme.webp" alt="" />
-            </Box>
-            <Box className="review-box">
-              <img src="/img/seafood.webp" alt="" />
-            </Box>
-            <Box className="review-box">
-              <img src="/img/sweets.webp" alt="" />
-            </Box>
-            <Box className="review-box">
-              <img src="/img/doner.webp" alt="" />
-            </Box>
-          </Stack>
-        </Container>
-      </div>
-      <div className="address">
-        <Container>
-          <Stack className="address-area">
-            <Box className="title">Our address</Box>
-            <iframe
-              style={{ marginTop: "60px" }}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1630.90707688153!2d129.1601690511344!3d35.16125539637475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d5dbec08845%3A0xca3c2cb61605b2f2!2z67aA7IKw6rSR7Jet7IucIO2VtOyatOuMgOq1rCDspJHrj5kgMTM5My01Nw!5e0!3m2!1sko!2skr!4v1737156968503!5m2!1sko!2skr"
-              width="1320"
-              height="500"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </Stack>
-        </Container>
-      </div>
     </div>
   );
 }
