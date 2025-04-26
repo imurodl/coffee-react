@@ -39,12 +39,10 @@ export default function Products(props: ProductProps) {
   const { products } = useSelector(productsRetriever);
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
-    limit: 8,
+    limit: 12,
     order: "createdAt",
     search: "",
   });
-  const [productCollectionStyle, setProductCollectionStyle] =
-    useState<ProductCollection>();
   const [searchText, setSearchText] = useState<string>("");
   const history = useHistory();
 
@@ -73,19 +71,21 @@ export default function Products(props: ProductProps) {
 
   const searchCollectionHandler = (collection: ProductCollection) => {
     productSearch.page = 1;
+    productSearch.limit = 8;
     productSearch.productCollection = collection;
-    setProductCollectionStyle(productSearch.productCollection);
     setProductSearch({ ...productSearch });
   };
 
   const searchOrderHandler = (order: string) => {
     productSearch.page = 1;
+    productSearch.limit = 8;
     productSearch.order = order;
     setProductSearch({ ...productSearch });
   };
 
   const searchProductHandler = () => {
     productSearch.search = searchText;
+    productSearch.limit = 8;
     setProductSearch({ ...productSearch });
   };
 
@@ -112,7 +112,7 @@ export default function Products(props: ProductProps) {
                 spacing={2}
                 sx={{
                   backgroundColor: "#fff",
-                  borderRadius: "30px",
+                  borderRadius: "10px",
                   padding: "6px 12px",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
                   width: "350px",
@@ -151,7 +151,7 @@ export default function Products(props: ProductProps) {
                     border: "none",
                     background: "#101020",
                     color: "#db9457",
-                    borderRadius: "20px",
+                    borderRadius: "5px",
                     textTransform: "none",
                     fontWeight: 600,
                     fontFamily: "Raleway",
@@ -322,7 +322,10 @@ export default function Products(props: ProductProps) {
               </div>
             </Stack>
 
-            <Stack className="product-wrapper">
+            <Stack
+              className="product-wrapper"
+              sx={{ display: products.length !== 0 ? "grid" : "flex" }}
+            >
               {products.length !== 0 ? (
                 products.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
