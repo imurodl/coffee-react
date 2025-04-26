@@ -41,6 +41,7 @@ export default function Basket(props: BasketProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  /** HANDLERS **/
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
   };
@@ -60,7 +61,8 @@ export default function Basket(props: BasketProps) {
       setOrderBuilder(new Date());
       history.push("/orders");
     } catch (err) {
-      sweetErrorHandling(err);
+      console.log(err);
+      sweetErrorHandling(err).then();
     }
   };
 
@@ -80,8 +82,8 @@ export default function Basket(props: BasketProps) {
             mt: 2,
             borderRadius: 3,
             p: 2,
-            minWidth: 350,
-            boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+            minWidth: 360,
+            boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
             fontFamily: "Raleway",
           },
         }}
@@ -97,18 +99,16 @@ export default function Basket(props: BasketProps) {
             <Typography
               variant="h6"
               sx={{
-                color: "#3A3A3B",
+                color: "#222",
                 fontFamily: "Raleway",
-                fontSize: "17px",
-                fontStyle: "normal",
                 fontWeight: 700,
-                lineHeight: "29px",
+                fontSize: "18px",
               }}
             >
               Your Cart
             </Typography>
             {cartItems.length > 0 && (
-              <IconButton onClick={onDeleteAll} color="primary">
+              <IconButton onClick={onDeleteAll} size="small" color="error">
                 <DeleteForeverIcon />
               </IconButton>
             )}
@@ -117,60 +117,77 @@ export default function Basket(props: BasketProps) {
           <Divider />
 
           {cartItems.length === 0 ? (
-            <Typography color="#777">Cart is empty.</Typography>
+            <Typography color="text.secondary" textAlign="center" py={4}>
+              Your cart is empty.
+            </Typography>
           ) : (
             cartItems.map((item: CartItem) => {
               const imagePath = `${serverApi}/${item.image}`;
               return (
-                <Box key={item._id} display="flex" gap={2} alignItems="center">
-                  <CancelIcon
-                    sx={{ cursor: "pointer", color: "#6e4b3a" }}
+                <Box
+                  key={item._id}
+                  display="flex"
+                  alignItems="center"
+                  gap={1.5}
+                  py={1}
+                >
+                  <IconButton
                     onClick={() => onDelete(item)}
-                  />
+                    size="small"
+                    sx={{ color: "#6e4b3a" }}
+                  >
+                    <CancelIcon fontSize="small" />
+                  </IconButton>
+
                   <img
                     src={imagePath}
                     alt={item.name}
                     style={{
-                      width: 50,
-                      height: 50,
+                      width: 45,
+                      height: 45,
                       objectFit: "cover",
                       borderRadius: 8,
+                      flexShrink: 0,
                     }}
                   />
+
                   <Box flex={1}>
-                    <Typography fontWeight={500} fontSize={14}>
+                    <Typography fontWeight={500} fontSize="14px">
                       {item.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      ${item.price} x {item.quantity}
+                      ${item.price} × {item.quantity}
                     </Typography>
                   </Box>
-                  <Stack direction="row" alignItems="center" spacing={1}>
+
+                  <Stack direction="row" spacing={0.5} alignItems="center">
                     <Button
                       onClick={() => onRemove(item)}
+                      size="small"
                       sx={{
-                        minWidth: 30,
+                        minWidth: 28,
+                        height: 28,
+                        borderRadius: "50%",
                         fontSize: 16,
-                        borderRadius: "999px",
-                        padding: "2px 8px",
-                        color: "#1e1e1e",
+                        color: "#333",
                         border: "1px solid #ccc",
+                        padding: 0,
                       }}
                     >
                       -
                     </Button>
                     <Button
                       onClick={() => onAdd(item)}
+                      size="small"
                       sx={{
-                        minWidth: 30,
+                        minWidth: 28,
+                        height: 28,
+                        borderRadius: "50%",
                         fontSize: 16,
-                        borderRadius: "999px",
-                        padding: "2px 8px",
                         color: "#fff",
                         backgroundColor: "#1e1e1e",
-                        "&:hover": {
-                          backgroundColor: "#6e4b3a",
-                        },
+                        "&:hover": { backgroundColor: "#6e4b3a" },
+                        padding: 0,
                       }}
                     >
                       +
@@ -184,22 +201,33 @@ export default function Basket(props: BasketProps) {
           {cartItems.length > 0 && (
             <>
               <Divider />
-              <Box display="flex" justifyContent="space-between">
-                <Typography fontWeight={500}>Subtotal</Typography>
-                <Typography>${itemsPrice.toFixed(2)}</Typography>
-              </Box>
-              <Box display="flex" justifyContent="space-between">
-                <Typography fontWeight={500}>Shipping</Typography>
-                <Typography>${shippingCost.toFixed(2)}</Typography>
-              </Box>
-              <Box display="flex" justifyContent="space-between" mt={1}>
-                <Typography fontWeight={600}>Total</Typography>
-                <Typography fontWeight={600}>${totalPrice}</Typography>
-              </Box>
+              <Stack spacing={1}>
+                <Box display="flex" justifyContent="space-between">
+                  <Typography color="text.secondary">Subtotal</Typography>
+                  <Typography>${itemsPrice.toFixed(2)}</Typography>
+                </Box>
+                <Box display="flex" justifyContent="space-between">
+                  <Typography color="text.secondary">Shipping</Typography>
+                  <Typography>${shippingCost.toFixed(2)}</Typography>
+                </Box>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  mt={1}
+                  fontWeight="bold"
+                >
+                  <Typography fontWeight={600}>Total</Typography>
+                  <Typography fontWeight={600}>${totalPrice}</Typography>
+                </Box>
+              </Stack>
+
               <Button
+                onClick={proceedOrderHandler}
+                startIcon={<ShoppingCartIcon />}
+                variant={"contained"}
                 sx={{
                   display: "flex",
-                  height: "43.75px",
+                  height: "44px",
                   padding: "13px 40px 14.75px 40px",
                   justifyContent: "center",
                   alignItems: "center",
