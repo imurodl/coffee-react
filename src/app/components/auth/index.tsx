@@ -141,7 +141,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       >
         <Fade in={signupOpen}>
           <Box className={classes.paper}>
-            <ModalImage src="/img/auth.webp" alt="Signup Banner" />
+            <ModalImage src="/img/amaya-hero.webp" alt="Signup Banner" />
             <Typography
               variant="h5"
               align="center"
@@ -245,7 +245,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       >
         <Fade in={loginOpen}>
           <Box className={classes.paper}>
-            <ModalImage src="/img/auth.webp" alt="Login Banner" />
+            <ModalImage src="/img/amaya-hero.webp" alt="Login Banner" />
             <Typography
               variant="h5"
               align="center"

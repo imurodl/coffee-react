@@ -43,6 +43,7 @@ export default function Products(props: ProductProps) {
     order: "createdAt",
     search: "",
   });
+  const totalPages = Math.ceil(products.length / productSearch.limit);
   const [searchText, setSearchText] = useState<string>("");
   const history = useHistory();
 
@@ -396,12 +397,9 @@ export default function Products(props: ProductProps) {
           </Stack>
           <Stack className="pagination-section">
             <Pagination
-              count={
-                products.length !== 0
-                  ? productSearch.page + 1
-                  : productSearch.page
-              }
+              count={totalPages}
               page={productSearch.page}
+              onChange={paginationHandler}
               renderItem={(item) => (
                 <PaginationItem
                   components={{
@@ -410,9 +408,23 @@ export default function Products(props: ProductProps) {
                   }}
                   {...item}
                   color="secondary"
+                  sx={{
+                    fontFamily: "Raleway",
+                    fontSize: "13.6px",
+                    fontWeight: 500,
+                    "&.Mui-selected": {
+                      fontWeight: 600,
+                      fontSize: "14.2px",
+                    },
+                  }}
                 />
               )}
-              onChange={paginationHandler}
+              sx={{
+                "& .MuiPagination-ul": {
+                  justifyContent: "center",
+                  gap: "8px",
+                },
+              }}
             />
           </Stack>
         </Stack>

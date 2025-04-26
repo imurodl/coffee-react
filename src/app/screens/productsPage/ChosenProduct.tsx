@@ -93,10 +93,6 @@ export default function ChosenProduct(props: ChosenProductProps) {
   /* HANDLERS */
   const choseDishHandler = (id: string) => {
     history.push(`/products/${id}`);
-    window.scrollTo(0, 0); // scroll top smoothly
-    setTimeout(() => {
-      window.location.reload();
-    }, 300);
   };
 
   useEffect(() => {
@@ -330,39 +326,43 @@ export default function ChosenProduct(props: ChosenProductProps) {
         </Box>
         <Stack className="related-products">
           {relatedProducts.length !== 0 ? (
-            relatedProducts.map((product: Product) => {
-              const imagePath = `${serverApi}/${product.productImages[0]}`;
-              const sizeVolume =
-                product.productCollection === ProductCollection.DRINK
-                  ? product.productVolume + "l"
-                  : product.productSize + " size";
-              return (
-                <Stack
-                  key={product._id}
-                  className="product-card"
-                  onClick={() => choseDishHandler(product._id)}
-                >
+            relatedProducts
+              .filter((product) => product._id !== chosenProduct._id)
+              .map((product: Product) => {
+                const imagePath = `${serverApi}/${product.productImages[0]}`;
+                const sizeVolume =
+                  product.productCollection === ProductCollection.DRINK
+                    ? product.productVolume + "l"
+                    : product.productSize + " size";
+                return (
                   <Stack
-                    className="product-img"
-                    sx={{
-                      backgroundImage: `url(${imagePath})`,
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "cover",
-                    }}
+                    key={product._id}
+                    className="product-card"
+                    onClick={() => choseDishHandler(product._id)}
                   >
-                    <div className="product-sale">{sizeVolume}</div>
+                    <Stack
+                      className="product-img"
+                      sx={{
+                        backgroundImage: `url(${imagePath})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                      }}
+                    >
+                      <div className="product-sale">{sizeVolume}</div>
+                    </Stack>
+                    <Box className="product-desc">
+                      <span className="product-title">
+                        {product.productName}
+                      </span>
+                      <div className="product-desc">
+                        <MonetizationOnIcon />
+                        {product.productPrice}
+                      </div>
+                      <div className="text-hidden">SEE PRODUCT</div>
+                    </Box>
                   </Stack>
-                  <Box className="product-desc">
-                    <span className="product-title">{product.productName}</span>
-                    <div className="product-desc">
-                      <MonetizationOnIcon />
-                      {product.productPrice}
-                    </div>
-                    <div className="text-hidden">SEE PRODUCT</div>
-                  </Box>
-                </Stack>
-              );
-            })
+                );
+              })
           ) : (
             <Box className="no-data">Products are not available!</Box>
           )}
