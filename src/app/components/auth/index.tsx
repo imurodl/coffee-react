@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import { Fab, Stack, TextField } from "@mui/material";
+import { Fab, Stack, TextField, Typography, Box, Button } from "@mui/material";
 import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
 import { T } from "../../../lib/types/common";
@@ -21,19 +21,20 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 2, 2),
+    borderRadius: "12px",
+    padding: theme.spacing(4),
+    boxShadow: theme.shadows[10],
+    width: "400px",
+    outline: "none",
   },
 }));
 
-const ModalImg = styled.img`
-  width: 62%;
-  height: 100%;
-  border-radius: 10px;
-  background: #000;
-  margin-top: 9px;
-  margin-left: 10px;
+const ModalImage = styled.img`
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
 `;
 
 interface AuthenticationModalProps {
@@ -49,10 +50,10 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const [memberNick, setMemberNick] = useState<string>("");
   const [memberPhone, setMemberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const { setAuthMember } = useGlobals();
 
   /** HANDLERS **/
-
   const handleUserName = (e: T) => {
     setMemberNick(e.target.value);
   };
@@ -63,6 +64,10 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
   const handlePassword = (e: T) => {
     setMemberPassword(e.target.value);
+  };
+
+  const handleConfirmPassword = (e: T) => {
+    setConfirmPassword(e.target.value);
   };
 
   const handlePasswordKeydown = (e: T) => {
@@ -78,6 +83,8 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       const isFulfill =
         memberNick !== "" && memberPhone !== "" && memberPassword !== "";
       if (!isFulfill) throw new Error(Messages.error3);
+
+      if (memberPassword !== confirmPassword) throw new Error(Messages.error6);
 
       const signupInput: MemberInput = {
         memberNick: memberNick,
@@ -121,115 +128,192 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
   return (
     <div>
+      {/* Signup Modal */}
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby="signup-modal-title"
+        aria-describedby="signup-modal-description"
         className={classes.modal}
         open={signupOpen}
         onClose={handleSignupClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
+        BackdropProps={{ timeout: 500 }}
       >
         <Fade in={signupOpen}>
-          <Stack
-            className={classes.paper}
-            direction={"row"}
-            sx={{ width: "800px" }}
-          >
-            <ModalImg src={"/img/auth.webp"} alt="camera" />
-            <Stack sx={{ marginLeft: "69px", alignItems: "center" }}>
-              <h2>Signup Form</h2>
+          <Box className={classes.paper}>
+            <ModalImage src="/img/auth.webp" alt="Signup Banner" />
+            <Typography
+              variant="h5"
+              align="center"
+              mb={2}
+              fontFamily={"Raleway"}
+              fontWeight={600}
+              fontSize={"20px"}
+              letterSpacing={2}
+              textTransform={"uppercase"}
+            >
+              Create an Account
+            </Typography>
+            <Stack spacing={2}>
               <TextField
-                sx={{ marginTop: "7px" }}
-                id="outlined-basic"
-                label="username"
+                id="signup-username"
+                label="Username"
                 variant="outlined"
+                fullWidth
+                value={memberNick}
                 onChange={handleUserName}
               />
               <TextField
-                sx={{ my: "17px" }}
-                id="outlined-basic"
-                label="phone number"
+                id="signup-phone"
+                label="Phone Number"
                 variant="outlined"
+                fullWidth
+                value={memberPhone}
                 onChange={handlePhone}
               />
               <TextField
-                id="outlined-basic"
-                label="password"
+                id="signup-password"
+                label="Password"
                 variant="outlined"
+                fullWidth
+                type="password"
+                value={memberPassword}
                 onChange={handlePassword}
+                // onKeyDown={handlePasswordKeydown}
+              />
+              <TextField
+                id="signup-password-confirm"
+                label="Confirm password"
+                variant="outlined"
+                fullWidth
+                type="password"
+                value={confirmPassword}
+                onChange={handleConfirmPassword}
                 onKeyDown={handlePasswordKeydown}
               />
-              <Fab
-                sx={{ marginTop: "30px", width: "120px" }}
-                variant="extended"
+              <Button
+                // variant="extended"
                 color="primary"
                 onClick={handleSignupRequest}
+                sx={{
+                  mt: 2,
+                  alignSelf: "center",
+                  display: "flex",
+                  height: "48px",
+                  width: "60%",
+                  padding: "13px 40px 14.75px 40px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexShrink: 0,
+                  border: "2px solid #DB9457",
+                  backgroundColor: "transparent",
+                  color: "#242434",
+                  fontFamily: "Raleway",
+                  fontSize: "13.6px",
+                  fontStyle: "normal",
+                  fontWeight: 600,
+                  lineHeight: "29.75px",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  textAlign: "center",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#DB9457",
+                    color: "#FFFFFF",
+                    borderColor: "#DB9457",
+                  },
+                }}
               >
                 <LoginIcon sx={{ mr: 1 }} />
-                Signup
-              </Fab>
+                sign up
+              </Button>
             </Stack>
-          </Stack>
+          </Box>
         </Fade>
       </Modal>
 
+      {/* Login Modal */}
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby="login-modal-title"
+        aria-describedby="login-modal-description"
         className={classes.modal}
         open={loginOpen}
         onClose={handleLoginClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
+        BackdropProps={{ timeout: 500 }}
       >
         <Fade in={loginOpen}>
-          <Stack
-            className={classes.paper}
-            direction={"row"}
-            sx={{ width: "700px" }}
-          >
-            <ModalImg src={"/img/auth.webp"} alt="camera" />
-            <Stack
-              sx={{
-                marginLeft: "65px",
-                marginTop: "25px",
-                alignItems: "center",
-              }}
+          <Box className={classes.paper}>
+            <ModalImage src="/img/auth.webp" alt="Login Banner" />
+            <Typography
+              variant="h5"
+              align="center"
+              mb={2}
+              fontFamily={"Raleway"}
+              fontWeight={600}
+              fontSize={"20px"}
+              letterSpacing={2}
+              textTransform={"uppercase"}
             >
-              <h2>Login Form</h2>
+              Welcome Back
+            </Typography>
+            <Stack spacing={2}>
               <TextField
-                id="outlined-basic"
-                label="username"
+                id="login-username"
+                label="Username"
                 variant="outlined"
-                sx={{ my: "10px" }}
+                fullWidth
+                value={memberNick}
                 onChange={handleUserName}
               />
               <TextField
-                id={"outlined-basic"}
-                label={"password"}
-                variant={"outlined"}
-                type={"password"}
+                id="login-password"
+                label="Password"
+                variant="outlined"
+                fullWidth
+                type="password"
+                value={memberPassword}
                 onChange={handlePassword}
                 onKeyDown={handlePasswordKeydown}
               />
-              <Fab
-                sx={{ marginTop: "27px", width: "120px" }}
-                variant={"extended"}
-                color={"primary"}
+              <Button
+                color="primary"
                 onClick={handleLoginRequest}
+                sx={{
+                  mt: 2,
+                  alignSelf: "center",
+                  display: "flex",
+                  height: "48px",
+                  width: "60%",
+                  padding: "13px 40px 14.75px 40px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexShrink: 0,
+                  border: "2px solid #DB9457",
+                  backgroundColor: "transparent",
+                  color: "#242434",
+                  fontFamily: "Raleway",
+                  fontSize: "13.6px",
+                  fontStyle: "normal",
+                  fontWeight: 600,
+                  lineHeight: "29.75px",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  textAlign: "center",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#DB9457",
+                    color: "#FFFFFF",
+                    borderColor: "#DB9457",
+                  },
+                }}
               >
                 <LoginIcon sx={{ mr: 1 }} />
                 Login
-              </Fab>
+              </Button>
             </Stack>
-          </Stack>
+          </Box>
         </Fade>
       </Modal>
     </div>
