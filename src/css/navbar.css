@@ -54,7 +54,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.9);
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  background-color: #f8f8ffd9;
   box-shadow: 0px 0px 24px 0px rgba(10, 10, 20, 0.06);
   z-index: 1059;
 }
@@ -63,22 +64,6 @@
   min-width: 1300px;
   height: 50px;
   z-index: 10000;
-}
-
-.home-navbar .navbar-container .menu .login-button {
-  height: 44px;
-  border: 2px solid #db9457;
-  padding: 13px 37.695px 14.75px 38px;
-  background: #fff;
-  color: #666;
-  text-align: center;
-  font-family: "Raleway";
-  font-size: 13.6px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 29.75px; /* 218.75% */
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
 .home-navbar .navbar-container .menu .user-avatar {
@@ -200,23 +185,6 @@
   margin-top: 73px;
 }
 
-.home-navbar .navbar-container .header-frame .detail .signup .signup-button {
-  width: 210px;
-  height: 60px;
-  border: 2px solid #db9457;
-  padding: 13px 37.695px 14.75px 38px;
-  background: white;
-  color: #666;
-  text-align: center;
-  font-family: Raleway;
-  font-size: 13.6px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 29.75px; /* 218.75% */
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
 .signup-button:hover {
   background: #db9457;
   color: #fff;
@@ -281,29 +249,13 @@
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0px 24px 0px rgba(10, 10, 20, 0.06);
-  z-index: 99999999;
+  z-index: 1059;
 }
 
 .other-navbar .navbar-container .menu {
   min-width: 1300px;
   height: 50px;
   z-index: 10000;
-}
-
-.other-navbar .navbar-container .menu .login-button {
-  height: 44px;
-  border: 2px solid #db9457;
-  padding: 13px 37.695px 14.75px 38px;
-  background: #fff;
-  color: #666;
-  text-align: center;
-  font-family: "Raleway";
-  font-size: 13.6px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 29.75px; /* 218.75% */
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
 .other-navbar .navbar-container .menu .user-avatar {
@@ -428,7 +380,7 @@
 
 /*******************      BASKET      *************************/
 
-/* BASKET */
+/* BASKET
 
 .basket-frame {
   position: relative;
@@ -437,7 +389,7 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  background: #f8f8ff;
+  background: #fff;
   border-radius: 16px;
 }
 
@@ -561,4 +513,4 @@
   height: 260px;
   display: flex;
   flex-direction: column;
-}
+} */

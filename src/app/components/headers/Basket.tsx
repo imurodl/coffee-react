@@ -1,8 +1,14 @@
 import React from "react";
-import { Box, Button, Stack } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import Menu from "@mui/material/Menu";
+import {
+  Box,
+  Button,
+  Stack,
+  Typography,
+  Divider,
+  IconButton,
+  Badge,
+  Menu,
+} from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -35,7 +41,6 @@ export default function Basket(props: BasketProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  /** HANDLERS **/
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
   };
@@ -55,126 +60,172 @@ export default function Basket(props: BasketProps) {
       setOrderBuilder(new Date());
       history.push("/orders");
     } catch (err) {
-      console.log(err);
-      sweetErrorHandling(err).then();
+      sweetErrorHandling(err);
     }
   };
 
   return (
-    <Box className={"hover-line"}>
-      <IconButton
-        aria-label="cart"
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
+    <Box>
+      <IconButton onClick={handleClick}>
         <Badge badgeContent={cartItems.length} color="secondary">
-          <img src={"/icons/shopping-cart.svg"} />
+          <img src="/icons/shopping-cart.svg" alt="Cart" />
         </Badge>
       </IconButton>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
         PaperProps={{
-          elevation: 0,
           sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
+            mt: 2,
+            borderRadius: 3,
+            p: 2,
+            minWidth: 350,
+            boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+            fontFamily: "Raleway",
           },
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <Stack className={"basket-frame"}>
-          <Box className={"all-check-box"}>
-            {cartItems.length === 0 ? (
-              <div>Cart is empty!</div>
-            ) : (
-              <Stack flexDirection={"row"} justifyContent={"space-between"}>
-                <div>Cart Products:</div>
-                <DeleteForeverIcon
-                  onClick={onDeleteAll}
-                  color={"primary"}
-                  sx={{ marginLeft: "10px", cursor: "pointer" }}
-                />
-              </Stack>
+        <Stack spacing={2}>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                color: "#3A3A3B",
+                fontFamily: "Raleway",
+                fontSize: "17px",
+                fontStyle: "normal",
+                fontWeight: 700,
+                lineHeight: "29px",
+              }}
+            >
+              Your Cart
+            </Typography>
+            {cartItems.length > 0 && (
+              <IconButton onClick={onDeleteAll} color="primary">
+                <DeleteForeverIcon />
+              </IconButton>
             )}
           </Box>
 
-          <Box className={"orders-main-wrapper"}>
-            <Box className={"orders-wrapper"}>
-              {cartItems.map((item: CartItem) => {
-                const imagePath = `${serverApi}/${item.image}`;
-                return (
-                  <Box className={"basket-info-box"} key={item._id}>
-                    <div className={"cancel-btn"}>
-                      <CancelIcon
-                        onClick={() => onDelete(item)}
-                        color={"primary"}
-                      />
-                    </div>
-                    <img src={imagePath} className={"product-img"} />
-                    <span className={"product-name"}>{item.name}</span>
-                    <p className={"product-price"}>
-                      ${item.price} x {item.quantity}
-                    </p>
-                    <Box sx={{ minWidth: 120 }}>
-                      <div className="col-2">
-                        <button
-                          className="remove"
-                          onClick={() => onRemove(item)}
-                        >
-                          -
-                        </button>{" "}
-                        <button className="add" onClick={() => onAdd(item)}>
-                          +
-                        </button>
-                      </div>
-                    </Box>
-                  </Box>
-                );
-              })}
-            </Box>
-          </Box>
-          {cartItems.length !== 0 ? (
-            <Box className={"basket-order"}>
-              <span className={"price"}>
-                Total: ${totalPrice} ({itemsPrice} + {shippingCost})
-              </span>
-              <Button
-                onClick={proceedOrderHandler}
-                startIcon={<ShoppingCartIcon />}
-                variant={"contained"}
-              >
-                Order
-              </Button>
-            </Box>
+          <Divider />
+
+          {cartItems.length === 0 ? (
+            <Typography color="#777">Cart is empty.</Typography>
           ) : (
-            ""
+            cartItems.map((item: CartItem) => {
+              const imagePath = `${serverApi}/${item.image}`;
+              return (
+                <Box key={item._id} display="flex" gap={2} alignItems="center">
+                  <CancelIcon
+                    sx={{ cursor: "pointer", color: "#6e4b3a" }}
+                    onClick={() => onDelete(item)}
+                  />
+                  <img
+                    src={imagePath}
+                    alt={item.name}
+                    style={{
+                      width: 50,
+                      height: 50,
+                      objectFit: "cover",
+                      borderRadius: 8,
+                    }}
+                  />
+                  <Box flex={1}>
+                    <Typography fontWeight={500} fontSize={14}>
+                      {item.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      ${item.price} x {item.quantity}
+                    </Typography>
+                  </Box>
+                  <Stack direction="row" alignItems="center" spacing={1}>
+                    <Button
+                      onClick={() => onRemove(item)}
+                      sx={{
+                        minWidth: 30,
+                        fontSize: 16,
+                        borderRadius: "999px",
+                        padding: "2px 8px",
+                        color: "#1e1e1e",
+                        border: "1px solid #ccc",
+                      }}
+                    >
+                      -
+                    </Button>
+                    <Button
+                      onClick={() => onAdd(item)}
+                      sx={{
+                        minWidth: 30,
+                        fontSize: 16,
+                        borderRadius: "999px",
+                        padding: "2px 8px",
+                        color: "#fff",
+                        backgroundColor: "#1e1e1e",
+                        "&:hover": {
+                          backgroundColor: "#6e4b3a",
+                        },
+                      }}
+                    >
+                      +
+                    </Button>
+                  </Stack>
+                </Box>
+              );
+            })
+          )}
+
+          {cartItems.length > 0 && (
+            <>
+              <Divider />
+              <Box display="flex" justifyContent="space-between">
+                <Typography fontWeight={500}>Subtotal</Typography>
+                <Typography>${itemsPrice.toFixed(2)}</Typography>
+              </Box>
+              <Box display="flex" justifyContent="space-between">
+                <Typography fontWeight={500}>Shipping</Typography>
+                <Typography>${shippingCost.toFixed(2)}</Typography>
+              </Box>
+              <Box display="flex" justifyContent="space-between" mt={1}>
+                <Typography fontWeight={600}>Total</Typography>
+                <Typography fontWeight={600}>${totalPrice}</Typography>
+              </Box>
+              <Button
+                sx={{
+                  display: "flex",
+                  height: "43.75px",
+                  padding: "13px 40px 14.75px 40px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexShrink: 0,
+                  border: "2px solid #DB9457",
+                  backgroundColor: "transparent",
+                  color: "#242434",
+                  fontFamily: "Raleway",
+                  fontSize: "13.6px",
+                  fontStyle: "normal",
+                  fontWeight: 600,
+                  lineHeight: "29.75px",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  textAlign: "center",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#DB9457",
+                    color: "#FFFFFF",
+                    borderColor: "#DB9457",
+                  },
+                }}
+              >
+                proceed to order
+              </Button>
+            </>
           )}
         </Stack>
       </Menu>

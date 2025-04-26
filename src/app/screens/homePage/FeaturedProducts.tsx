@@ -19,9 +19,39 @@ export default function FeaturedProducts() {
               This box contains all three of our delicious, ethically sourced
               coffee blends.
             </Typography>
-            <div className="info-banner-btn">
-              <a href="/products">open the box</a>
-            </div>
+            <Button
+              LinkComponent={"a"}
+              href="/products"
+              sx={{
+                marginTop: "45px",
+                display: "flex",
+                width: "240px",
+                height: "43.75px",
+                padding: "13px 40px 14.75px 40px",
+                justifyContent: "center",
+                alignItems: "center",
+                flexShrink: 0,
+                border: "none",
+                backgroundColor: "#fff",
+                color: "#101020",
+                fontFamily: "Raleway",
+                fontSize: "13.6px",
+                fontStyle: "normal",
+                fontWeight: 600,
+                lineHeight: "29.75px",
+                letterSpacing: "2px",
+                textTransform: "uppercase",
+                textAlign: "center",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  backgroundColor: "#101020",
+                  color: "#FFFFFF",
+                  borderColor: "#DB9457",
+                },
+              }}
+            >
+              open the box
+            </Button>
           </Stack>
           <Stack
             className="cards-wrapper"
@@ -42,6 +72,32 @@ export default function FeaturedProducts() {
             className="info-main-btn"
             LinkComponent={"a"}
             href="/products"
+            sx={{
+              display: "flex",
+              width: "260px",
+              height: "43.75px",
+              padding: "13px 40px 14.75px 40px",
+              justifyContent: "center",
+              alignItems: "center",
+              flexShrink: 0,
+              border: "2px solid #DB9457",
+              backgroundColor: "transparent",
+              color: "#242434",
+              fontFamily: "Raleway",
+              fontSize: "13.6px",
+              fontStyle: "normal",
+              fontWeight: 600,
+              lineHeight: "29.75px",
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              textAlign: "center",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#DB9457",
+                color: "#FFFFFF",
+                borderColor: "#DB9457",
+              },
+            }}
           >
             shop all coffee
           </Button>

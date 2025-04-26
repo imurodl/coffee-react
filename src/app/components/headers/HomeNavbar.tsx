@@ -182,6 +182,32 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                     // variant="contained"
                     className="login-button"
                     onClick={() => setLoginOpen(true)}
+                    sx={{
+                      display: "flex",
+                      height: "44px",
+                      width: "160px",
+                      padding: "13px 40px 14.75px 40px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexShrink: 0,
+                      border: "2px solid #DB9457",
+                      backgroundColor: "transparent",
+                      color: "#242434",
+                      fontFamily: "Raleway",
+                      fontSize: "13.6px",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      lineHeight: "29.75px",
+                      letterSpacing: "2px",
+                      textTransform: "uppercase",
+                      textAlign: "center",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        backgroundColor: "#DB9457",
+                        color: "#FFFFFF",
+                        borderColor: "#DB9457",
+                      },
+                    }}
                   >
                     Login
                   </Button>
@@ -264,6 +290,32 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                   // variant="contained"
                   className="signup-button"
                   onClick={() => setSignupOpen(true)}
+                  sx={{
+                    display: "flex",
+                    height: "48px",
+                    width: "200px",
+                    padding: "13px 40px 14.75px 40px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexShrink: 0,
+                    border: "2px solid #DB9457",
+                    backgroundColor: "transparent",
+                    color: "#242434",
+                    fontFamily: "Raleway",
+                    fontSize: "13.6px",
+                    fontStyle: "normal",
+                    fontWeight: 600,
+                    lineHeight: "29.75px",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    textAlign: "center",
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      backgroundColor: "#DB9457",
+                      color: "#FFFFFF",
+                      borderColor: "#DB9457",
+                    },
+                  }}
                 >
                   sign up
                 </Button>
