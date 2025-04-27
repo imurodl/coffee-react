@@ -1,21 +1,19 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import TabPanel from "@mui/lab/TabPanel";
-import moment from "moment";
-import { Box, Stack } from "@mui/material";
-import { useSelector } from "react-redux";
+import { Box, Stack, Typography, Button } from "@mui/material";
 import { createSelector } from "reselect";
+import { useSelector } from "react-redux";
 import { retrieveProcessOrders } from "./selector";
 import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
-import { Messages, serverApi } from "../../../lib/config";
+import { serverApi, Messages } from "../../../lib/config";
 import { useGlobals } from "../../hooks/useGlobals";
-import { T } from "../../../lib/types/common";
 import { OrderStatus } from "../../../lib/enums/order.enum";
+import { T } from "../../../lib/types/common";
 import OrderService from "../../services/OrderService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import moment from "moment";
 
-/** REDUX SLICE & SELECTOR */
+// Use your existing selector properly
 const processOrderRetriever = createSelector(
   retrieveProcessOrders,
   (processOrders) => ({ processOrders })
@@ -29,7 +27,6 @@ export default function ProcessOrders({ setValue }: OrdersProps) {
   const { processOrders } = useSelector(processOrderRetriever);
   const { authMember, setOrderBuilder } = useGlobals();
 
-  /** HANDLERS **/
   const finishOrderHandler = async (e: T) => {
     try {
       if (!authMember) throw new Error(Messages.error2);
@@ -39,94 +36,127 @@ export default function ProcessOrders({ setValue }: OrdersProps) {
         orderId: orderId,
         orderStatus: OrderStatus.FINISH,
       };
-      const confirmation = window.confirm("Have you received your order?");
+
+      const confirmation = window.confirm(
+        "Confirm that you received the order?"
+      );
       if (confirmation) {
         const order = new OrderService();
         await order.updateOrder(input);
-        setValue("3");
         setOrderBuilder(new Date());
+        setValue("3");
       }
     } catch (err) {
       console.log(err);
-      sweetErrorHandling(err).then();
+      sweetErrorHandling(err);
     }
   };
 
   return (
-    <TabPanel value="2">
-      <Stack>
-        {processOrders.map((order: Order) => {
-          return (
-            <Box className="order-main-box" key={order._id}>
-              <Box className="order-box-scroll">
-                {order?.orderItems?.map((orderItem: OrderItem) => {
-                  const product: Product = order.productData.filter(
-                    (ele: Product) => orderItem.productId === ele._id
-                  )[0];
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
-                  return (
-                    <Box className="orders-name-price" key={orderItem._id}>
-                      <img src={imagePath} alt="" className="order-dish-img" />
-                      <p className="title-dish">{product.productName}</p>
-                      <Box className="price-box">
-                        <p>{orderItem.itemPrice}</p>
-                        <img src="/icons/close.svg" alt="" />
-                        <p>{orderItem.itemQuantity}</p>
-                        <img src="/icons/close.svg" alt="" />
-                        <p style={{ marginLeft: "15px" }}>
-                          {orderItem.itemQuantity * orderItem.itemPrice}
-                        </p>
-                      </Box>
-                    </Box>
-                  );
-                })}
-              </Box>
+    <Stack spacing={4}>
+      {processOrders.length > 0 ? (
+        processOrders.map((order: Order) => (
+          <Box
+            key={order._id}
+            p={3}
+            bgcolor="white"
+            borderRadius={4}
+            boxShadow="0 4px 20px rgba(0,0,0,0.08)"
+          >
+            <Stack spacing={2}>
+              {order.orderItems.map((orderItem: OrderItem) => {
+                const product: Product = order.productData.find(
+                  (p: Product) => p._id === orderItem.productId
+                )!;
+                const imagePath = `${serverApi}/${product.productImages[0]}`;
 
-              <Box className="total-price-box">
-                <Box className="box-total">
-                  <p>Product price</p>
-                  <p>{order.orderTotal - order.orderDelivery}</p>
-                  <img
-                    src="/icons/plus.svg"
-                    alt=""
-                    style={{ marginLeft: "20px" }}
-                  />
-                  <p>Delivery cost</p>
-                  <p>{order.orderDelivery}</p>
-                  <img
-                    src="/icons/pause.svg"
-                    alt=""
-                    style={{ marginLeft: "20px" }}
-                  />
-                  <p>Total</p>
-                  <p>{order.orderTotal}</p>
+                return (
+                  <Stack
+                    key={orderItem._id}
+                    direction="row"
+                    alignItems="center"
+                    spacing={2}
+                  >
+                    <img
+                      src={imagePath}
+                      alt={product.productName}
+                      style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: 8,
+                        objectFit: "cover",
+                      }}
+                    />
+                    <Stack>
+                      <Typography fontFamily="Raleway" fontWeight={600}>
+                        {product.productName}
+                      </Typography>
+                      <Typography fontSize={14} color="text.secondary">
+                        {orderItem.itemQuantity} x ${orderItem.itemPrice} ={" "}
+                        <strong>
+                          ${orderItem.itemQuantity * orderItem.itemPrice}
+                        </strong>
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                );
+              })}
+
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                mt={2}
+              >
+                <Box>
+                  <Typography fontFamily="Raleway" fontWeight={600}>
+                    Total: ${order.orderTotal}
+                  </Typography>
+                  <Typography fontSize={13} color="text.secondary" mt={0.5}>
+                    {moment(order.createdAt).format("YYYY-MM-DD HH:mm")}
+                  </Typography>
                 </Box>
-                <p className="data-compl">
-                  {moment().format("YY-MM-DD HH:mm")}
-                </p>
+
                 <Button
                   value={order._id}
-                  className="verify-button"
-                  variant="contained"
                   onClick={finishOrderHandler}
+                  sx={{
+                    height: "43.75px",
+                    px: "40px",
+                    fontFamily: "Raleway",
+                    fontSize: "13.6px",
+                    fontWeight: 600,
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    border: "2px solid #DB9457",
+                    backgroundColor: "transparent",
+                    color: "#242434",
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      backgroundColor: "#DB9457",
+                      color: "#FFFFFF",
+                      borderColor: "#DB9457",
+                    },
+                  }}
                 >
-                  verify to fulfil
+                  Verify Received
                 </Button>
-              </Box>
-            </Box>
-          );
-        })}
-        {!processOrders ||
-          (processOrders.length === 0 && (
-            <Box display="flex" justifyContent="center">
-              <img
-                src="/icons/noimage-list.svg"
-                alt=""
-                style={{ width: 300, height: 300 }}
-              />
-            </Box>
-          ))}
-      </Stack>
-    </TabPanel>
+              </Stack>
+            </Stack>
+          </Box>
+        ))
+      ) : (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="300px"
+        >
+          <Typography color="text.secondary">
+            No processing orders yet.
+          </Typography>
+        </Box>
+      )}
+    </Stack>
   );
 }

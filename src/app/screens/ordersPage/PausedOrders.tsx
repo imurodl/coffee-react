@@ -1,20 +1,19 @@
+// First: PausedOrders.tsx
 import React from "react";
-import Button from "@mui/material/Button";
+import { Box, Stack, Button } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
-import { Box, Stack } from "@mui/material";
+import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrievePausedOrders } from "./selector";
-import { useSelector } from "react-redux";
+import { useGlobals } from "../../hooks/useGlobals";
+import { serverApi, Messages } from "../../../lib/config";
 import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
-import { Messages, serverApi } from "../../../lib/config";
-import { T } from "../../../lib/types/common";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
-import { useGlobals } from "../../hooks/useGlobals";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { T } from "../../../lib/types/common";
 
-/** REDUX SLICE & SELECTOR */
 const pausedOrderRetriever = createSelector(
   retrievePausedOrders,
   (pausedOrders) => ({ pausedOrders })
@@ -28,26 +27,21 @@ export default function PausedOrders({ setValue }: OrdersProps) {
   const { pausedOrders } = useSelector(pausedOrderRetriever);
   const { authMember, setOrderBuilder } = useGlobals();
 
-  /** HANDLERS **/
-
   const deleteOrderHandler = async (e: T) => {
     try {
       if (!authMember) throw new Error(Messages.error2);
-
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
-        orderId: orderId,
+        orderId,
         orderStatus: OrderStatus.DELETE,
       };
-      const confirmation = window.confirm("Do you want to delete this order?");
+      const confirmation = window.confirm("Do you want to cancel this order?");
       if (confirmation) {
         const order = new OrderService();
         await order.updateOrder(input);
-
         setOrderBuilder(new Date());
       }
     } catch (err) {
-      console.log(err);
       sweetErrorHandling(err);
     }
   };
@@ -55,12 +49,9 @@ export default function PausedOrders({ setValue }: OrdersProps) {
   const processOrderHandler = async (e: T) => {
     try {
       if (!authMember) throw new Error(Messages.error2);
-
-      //PAYMENT PROCESS
-
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
-        orderId: orderId,
+        orderId,
         orderStatus: OrderStatus.PROCESS,
       };
       const confirmation = window.confirm("Do you want to proceed this order?");
@@ -71,91 +62,136 @@ export default function PausedOrders({ setValue }: OrdersProps) {
         setOrderBuilder(new Date());
       }
     } catch (err) {
-      console.log(err);
-      sweetErrorHandling(err).then();
+      sweetErrorHandling(err);
     }
   };
 
   return (
     <TabPanel value="1">
-      <Stack>
-        {pausedOrders.map((order: Order) => {
-          return (
-            <Box className="order-main-box" key={order._id}>
-              <Box className="order-box-scroll">
-                {order?.orderItems?.map((orderItem: OrderItem) => {
-                  const product: Product = order.productData.filter(
-                    (ele: Product) => orderItem.productId === ele._id
-                  )[0];
+      <Stack spacing={3}>
+        {pausedOrders.length > 0 ? (
+          pausedOrders.map((order: Order) => (
+            <Box
+              key={order._id}
+              sx={{
+                p: 3,
+                borderRadius: 4,
+                bgcolor: "white",
+                boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+              }}
+            >
+              <Stack spacing={2}>
+                {order.orderItems.map((orderItem: OrderItem) => {
+                  const product = order.productData.find(
+                    (ele: Product) => ele._id === orderItem.productId
+                  );
+                  if (!product) return null;
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
-                    <Box className="orders-name-price" key={orderItem._id}>
-                      <img src={imagePath} alt="" className="order-dish-img" />
-                      <p className="title-dish">{product.productName}</p>
-                      <Box className="price-box">
-                        <p>{orderItem.itemPrice}</p>
-                        <img src="/icons/close.svg" alt="" />
-                        <p>{orderItem.itemQuantity}</p>
-                        <img src="/icons/pause.svg" alt="" />
-                        <p style={{ marginLeft: "15px" }}>
-                          {orderItem.itemQuantity * orderItem.itemPrice}
-                        </p>
+                    <Box
+                      key={orderItem._id}
+                      display="flex"
+                      alignItems="center"
+                      gap={2}
+                    >
+                      <img
+                        src={imagePath}
+                        alt=""
+                        style={{
+                          width: 60,
+                          height: 60,
+                          borderRadius: 8,
+                          objectFit: "cover",
+                        }}
+                      />
+                      <Box>
+                        <Box fontWeight={600}>{product.productName}</Box>
+                        <Box fontSize={14} color="gray">
+                          {orderItem.itemQuantity} x ${orderItem.itemPrice}
+                        </Box>
                       </Box>
                     </Box>
                   );
                 })}
-              </Box>
 
-              <Box className="total-price-box">
-                <Box className="box-total">
-                  <p>Product price</p>
-                  <p>{order.orderTotal - order.orderDelivery}</p>
-                  <img
-                    src="/icons/plus.svg"
-                    alt=""
-                    style={{ marginLeft: "20px" }}
-                  />
-                  <p>Delivery cost</p>
-                  <p>{order.orderDelivery}</p>
-                  <img
-                    src="/icons/pause.svg"
-                    alt=""
-                    style={{ marginLeft: "20px" }}
-                  />
-                  <p>Total</p>
-                  <p>{order.orderTotal}</p>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Box fontWeight={700} fontSize={16}>
+                    Total: ${order.orderTotal}
+                  </Box>
+                  <Stack direction="row" spacing={2}>
+                    <Button
+                      value={order._id}
+                      onClick={deleteOrderHandler}
+                      sx={{
+                        display: "flex",
+                        height: "43.75px",
+                        padding: "13px 40px 14.75px 40px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexShrink: 0,
+                        border: "2px solid #DB9457",
+                        backgroundColor: "transparent",
+                        color: "#242434",
+                        fontFamily: "Raleway",
+                        fontSize: "13.6px",
+                        fontWeight: 500,
+                        letterSpacing: "2px",
+                        textTransform: "uppercase",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          backgroundColor: "#DB9457",
+                          color: "#fff",
+                        },
+                      }}
+                    >
+                      Cancel
+                    </Button>
+
+                    <Button
+                      value={order._id}
+                      onClick={processOrderHandler}
+                      sx={{
+                        display: "flex",
+                        height: "43.75px",
+                        padding: "13px 40px 14.75px 40px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexShrink: 0,
+                        border: "2px solid #DB9457",
+                        backgroundColor: "transparent",
+                        color: "#242434",
+                        fontFamily: "Raleway",
+                        fontSize: "13.6px",
+                        fontWeight: 500,
+                        letterSpacing: "2px",
+                        textTransform: "uppercase",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          backgroundColor: "#DB9457",
+                          color: "#fff",
+                        },
+                      }}
+                    >
+                      Pay Now
+                    </Button>
+                  </Stack>
                 </Box>
-                <Button
-                  value={order._id}
-                  variant="contained"
-                  color="secondary"
-                  className="cancel-button"
-                  onClick={deleteOrderHandler}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  value={order._id}
-                  className="pay-button"
-                  variant="contained"
-                  onClick={processOrderHandler}
-                >
-                  Payment
-                </Button>
-              </Box>
+              </Stack>
             </Box>
-          );
-        })}
-        {!pausedOrders ||
-          (pausedOrders.length === 0 && (
-            <Box display="flex" justifyContent="center">
-              <img
-                src="/icons/noimage-list.svg"
-                alt=""
-                style={{ width: 300, height: 300 }}
-              />
-            </Box>
-          ))}
+          ))
+        ) : (
+          <Box display="flex" justifyContent="center">
+            <img
+              src="/icons/noimage-list.svg"
+              alt="no orders"
+              style={{ width: 300, height: 300 }}
+            />
+          </Box>
+        )}
       </Stack>
     </TabPanel>
   );

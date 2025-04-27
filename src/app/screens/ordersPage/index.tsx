@@ -1,179 +1,192 @@
-import { useState, SyntheticEvent, useEffect } from "react";
-import { Container, Stack, Box, TextField } from "@mui/material";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import { useState, useEffect, SyntheticEvent } from "react";
+import {
+  Box,
+  Container,
+  Stack,
+  Tabs,
+  Tab,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+} from "@mui/material";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import TabContext from "@mui/lab/TabContext";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import TabPanel from "@mui/lab/TabPanel";
+import { setPausedOrders, setProcessOrders, setFinishedOrders } from "./slice";
+import { OrderInquiry } from "../../../lib/types/order";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import { useGlobals } from "../../hooks/useGlobals";
+import OrderService from "../../services/OrderService";
 import PausedOrders from "./PausedOrders";
 import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
-import { Dispatch } from "@reduxjs/toolkit";
-import { setFinishedOrders, setPausedOrders, setProcessOrders } from "./slice";
-import { Order, OrderInquiry } from "../../../lib/types/order";
-import { useDispatch } from "react-redux";
-import "../../../css/order.css";
-import { OrderStatus } from "../../../lib/enums/order.enum";
-import OrderService from "../../services/OrderService";
-import { useGlobals } from "../../hooks/useGlobals";
-import { useHistory } from "react-router-dom";
-import { serverApi } from "../../../lib/config";
-import { MemberType } from "../../../lib/enums/member.enum";
-
-/** REDUC SLICE & SELECTOR */
-const actionDispatch = (dispatch: Dispatch) => ({
-  setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
-  setProcessOrders: (data: Order[]) => dispatch(setProcessOrders(data)),
-  setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
-});
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import PaymentIcon from "@mui/icons-material/Payment";
+import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 
 export default function OrdersPage() {
-  const { setPausedOrders, setProcessOrders, setFinishedOrders } =
-    actionDispatch(useDispatch());
-  const history = useHistory();
-  const { orderBuilder, authMember } = useGlobals();
   const [value, setValue] = useState("1");
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
     limit: 8,
     orderStatus: OrderStatus.PAUSE,
   });
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { authMember, orderBuilder } = useGlobals();
 
   useEffect(() => {
     const order = new OrderService();
 
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PAUSE })
-      .then((data) => setPausedOrders(data))
+      .then((data) => dispatch(setPausedOrders(data)))
       .catch((err) => console.log(err));
 
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PROCESS })
-      .then((data) => setProcessOrders(data))
+      .then((data) => dispatch(setProcessOrders(data)))
       .catch((err) => console.log(err));
 
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
-      .then((data) => setFinishedOrders(data))
+      .then((data) => dispatch(setFinishedOrders(data)))
       .catch((err) => console.log(err));
   }, [orderInquiry, orderBuilder]);
 
-  /** HANDLERS **/
-
-  const handleChange = (e: SyntheticEvent, newValue: string) => {
+  const handleTabChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
   if (!authMember) history.push("/");
+
   return (
-    <div className="order-page">
-      <Container className="order-container">
-        <Stack className="order-left">
-          <TabContext value={value}>
-            <Box className="order-nav-frame">
+    <Box sx={{ bgcolor: "#f8f8ff", minHeight: "100vh", py: 6 }}>
+      <Container maxWidth="lg">
+        <Typography
+          variant="h4"
+          fontFamily="Raleway"
+          fontSize="28px"
+          fontWeight={600}
+          letterSpacing="6px"
+          textTransform="uppercase"
+          color="#101020"
+          textAlign="center"
+          mb={5}
+        >
+          My Orders
+        </Typography>
+
+        <Grid container spacing={6}>
+          {/* LEFT SIDE - ORDERS LIST */}
+          <Grid item xs={12} md={7}>
+            <TabContext value={value}>
               <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                 <Tabs
                   value={value}
-                  onChange={handleChange}
-                  aria-label="basic tabs example"
-                  className="table-list"
+                  onChange={handleTabChange}
+                  variant="fullWidth"
+                  textColor="inherit"
+                  indicatorColor="secondary"
+                  sx={{
+                    "& .MuiTab-root": {
+                      fontFamily: "Raleway",
+                      fontWeight: 600,
+                      fontSize: 14,
+                      textTransform: "uppercase",
+                    },
+                  }}
                 >
-                  <Tab label="PAUSED ORDERS" value="1" />
-                  <Tab label="PROCESS ORDERS" value="2" />
-                  <Tab label="FINISHED ORDERS" value="3" />
+                  <Tab label="Paused" value="1" />
+                  <Tab label="Processing" value="2" />
+                  <Tab label="Finished" value="3" />
                 </Tabs>
               </Box>
-            </Box>
-            <Stack className="order-main-context">
-              <PausedOrders setValue={setValue} />
-              <ProcessOrders setValue={setValue} />
-              <FinishedOrders />
-            </Stack>
-          </TabContext>
-        </Stack>
-        <Stack className="order-right">
-          <Box className="order-info-box">
-            <Box className="member-box">
-              <div className="order-user img">
-                <img
-                  src={
-                    authMember?.memberImage
-                      ? `${serverApi}/${authMember.memberImage}`
-                      : "/icons/default-user.svg"
-                  }
-                  alt=""
-                  className="order-user-avatar"
-                />
-                <div className="order-user-icon-box">
-                  <img
-                    src={
-                      authMember?.memberType === MemberType.RESTAURANT
-                        ? "/icons/restaurant.svg"
-                        : "/icons/user-badge.svg"
-                    }
-                    alt=""
-                    className="order-user-prof-img"
-                  />
-                </div>
-              </div>
-              <span className="order-user-name">{authMember?.memberNick}</span>
-              <span className="order-user-prof">{authMember?.memberType}</span>
-            </Box>
-            <Box className="liner"></Box>
-            <Box className="order-user-address">
-              <div style={{ display: "flex" }}>
-                <LocationOnIcon />
-                {authMember?.memberAddress
-                  ? authMember.memberAddress
-                  : "do not exist"}
-              </div>
-            </Box>
-          </Box>
-          <Box className="order-payment-box">
-            <Box className="card-details-box">
-              <TextField
-                id="outlined-basic"
-                label="Card number : 5243 4090 2002 7495"
-                variant="outlined"
-              />
-              <Stack
-                flexDirection="row"
-                justifyContent="space-between"
-                gap="8px"
+              <TabPanel value="1">
+                <PausedOrders setValue={setValue} />
+              </TabPanel>
+              <TabPanel value="2">
+                <ProcessOrders setValue={setValue} />
+              </TabPanel>
+              <TabPanel value="3">
+                <FinishedOrders />
+              </TabPanel>
+            </TabContext>
+          </Grid>
+
+          {/* RIGHT SIDE - PAYMENT FORM */}
+          <Grid item xs={12} md={5}>
+            <Box
+              p={4}
+              bgcolor="#fff"
+              borderRadius={4}
+              boxShadow="0 4px 20px rgba(0,0,0,0.1)"
+              display="flex"
+              flexDirection="column"
+              gap={3}
+            >
+              <Typography
+                fontFamily="Raleway"
+                fontWeight={600}
+                fontSize={22}
+                color="#101020"
+                textAlign="center"
               >
+                Payment Information
+              </Typography>
+
+              <Stack spacing={2}>
                 <TextField
-                  id="outlined-basic"
-                  label="07 / 24"
-                  variant="outlined"
+                  fullWidth
+                  label="Cardholder Name"
+                  placeholder="Justin Robertson"
+                  InputProps={{
+                    startAdornment: <LocalAtmIcon sx={{ mr: 1 }} />,
+                  }}
                 />
+
                 <TextField
-                  id="outlined-basic"
-                  label="CVV : 010"
-                  variant="outlined"
+                  fullWidth
+                  label="Card Number"
+                  placeholder="5243 4090 2002 7495"
+                  InputProps={{
+                    startAdornment: <CreditCardIcon sx={{ mr: 1 }} />,
+                  }}
+                />
+
+                <Stack direction="row" spacing={2}>
+                  <TextField
+                    fullWidth
+                    label="Expiry Date"
+                    placeholder="07/24"
+                  />
+                  <TextField fullWidth label="CVV" placeholder="010" />
+                </Stack>
+              </Stack>
+
+              <Stack direction="row" justifyContent="center" spacing={2} mt={3}>
+                <img
+                  src="/icons/visa-card.svg"
+                  alt="Visa"
+                  style={{ width: 50 }}
+                />
+                <img
+                  src="/icons/master-card.svg"
+                  alt="MasterCard"
+                  style={{ width: 50 }}
+                />
+                <img
+                  src="/icons/paypal-card.svg"
+                  alt="Paypal"
+                  style={{ width: 50 }}
                 />
               </Stack>
-              <TextField
-                id="outlined-basic"
-                label="Justin Robertson"
-                variant="outlined"
-              />
             </Box>
-            <Box className="payment-methods-box">
-              <Box>
-                <img src="/icons/western-card.svg" alt="" />
-              </Box>
-              <Box>
-                <img src="/icons/master-card.svg" alt="" />
-              </Box>
-              <Box>
-                <img src="/icons/paypal-card.svg" alt="" />
-              </Box>
-              <Box>
-                <img src="/icons/visa-card.svg" alt="" />
-              </Box>
-            </Box>
-          </Box>
-        </Stack>
+          </Grid>
+        </Grid>
       </Container>
-    </div>
+    </Box>
   );
 }
