@@ -100,7 +100,7 @@ export default function Products(props: ProductProps) {
   };
 
   return (
-    <div className="products">
+    <Box className="products" sx={{ py: 6 }}>
       <Container>
         <Stack alignItems={"center"}>
           <Stack className="avatar-big-box">
@@ -429,6 +429,6 @@ export default function Products(props: ProductProps) {
           </Stack>
         </Stack>
       </Container>
-    </div>
+    </Box>
   );
 }

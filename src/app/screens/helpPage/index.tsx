@@ -23,19 +23,18 @@ export default function HelpPage() {
   };
 
   return (
-    <Box className="help-page" sx={{ pt: 10, pb: 10 }}>
+    <Box className="help-page" sx={{ py: 6 }}>
       <Container maxWidth="md">
         <Typography
-          sx={{
-            fontFamily: "Raleway",
-            fontSize: "28px",
-            fontWeight: 600,
-            letterSpacing: "6px",
-            textTransform: "uppercase",
-            color: "#101020",
-            textAlign: "center",
-            mb: 5,
-          }}
+          variant="h4"
+          fontFamily="Raleway"
+          fontSize="28px"
+          fontWeight={600}
+          letterSpacing="6px"
+          textTransform="uppercase"
+          color="#101020"
+          textAlign="center"
+          mb={5}
         >
           Help Center
         </Typography>
