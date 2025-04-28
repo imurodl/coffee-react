@@ -120,6 +120,7 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 }
 
 .homepage .static-frame .info .cards-wrapper .card img {
@@ -128,6 +129,7 @@
 }
 
 .homepage .static-frame .info .cards-wrapper .card p {
+  margin: 0;
   color: #3a3a3b;
   text-align: center;
   font-family: "Playfair Display";
@@ -145,6 +147,24 @@
   font-style: normal;
   font-weight: 400;
   line-height: 25.5px; /* 187.5% */
+}
+
+.homepage .static-frame .info .cards-wrapper .card .hidden {
+  opacity: 0;
+  color: #db9457;
+  text-align: center;
+  font-family: "Raleway";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 17.85px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.homepage .static-frame .info .cards-wrapper .card:hover .hidden {
+  opacity: 1;
+  transition: all 2s ease;
 }
 
 /* POPULAR PRODUCTS */

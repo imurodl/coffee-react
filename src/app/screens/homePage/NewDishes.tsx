@@ -14,6 +14,7 @@ import { retrieveNewDishes } from "./selector";
 import { serverApi } from "../../../lib/config";
 import { Product } from "../../../lib/types/product";
 import { ProductCollection } from "../../../lib/enums/product.enums";
+import { useHistory } from "react-router-dom";
 
 /** REDUC SLICE & SELECTOR */
 const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
@@ -21,6 +22,11 @@ const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
 }));
 
 export default function NewDishes() {
+  const history = useHistory();
+  const choseDishHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
+
   const { newDishes } = useSelector(newDishesRetriever);
 
   return (
@@ -44,6 +50,7 @@ export default function NewDishes() {
                       key={product._id}
                       variant="outlined"
                       className={"card"}
+                      onClick={() => choseDishHandler(product._id)}
                     >
                       <CardOverflow>
                         <div className="product-sale">{sizeVolume}</div>

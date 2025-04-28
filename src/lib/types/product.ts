@@ -17,9 +17,10 @@ export interface Product {
 }
 
 export interface ProductInquiry {
-  order: string;
   page: number;
   limit: number;
+  order: string;
   productCollection?: ProductCollection;
   search?: string;
+  direction?: number;
 }

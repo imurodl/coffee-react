@@ -7,7 +7,12 @@ import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
+import {
+  setFeaturedProducts,
+  setNewDishes,
+  setPopularDishes,
+  setTopUsers,
+} from "./slice";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enums";
@@ -20,12 +25,12 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
   setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
+  setFeaturedProducts: (data: Product[]) => dispatch(setFeaturedProducts(data)),
 });
 
 export default function HomePage() {
-  const { setPopularDishes, setNewDishes, setTopUsers } = actionDispatch(
-    useDispatch()
-  );
+  const { setPopularDishes, setNewDishes, setTopUsers, setFeaturedProducts } =
+    actionDispatch(useDispatch());
   // Selector: STORE => DATA
 
   useEffect(() => {
@@ -40,6 +45,19 @@ export default function HomePage() {
       })
       .then((data) => {
         setPopularDishes(data);
+      })
+      .catch((err) => console.log(err));
+
+    product
+      .getProducts({
+        page: 1,
+        limit: 3,
+        order: "createdAt",
+        productCollection: ProductCollection.WHOLE_BEAN,
+        direction: 1,
+      })
+      .then((data) => {
+        setFeaturedProducts(data);
       })
       .catch((err) => console.log(err));
 
