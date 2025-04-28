@@ -39,7 +39,7 @@ export default function Products(props: ProductProps) {
   const { products } = useSelector(productsRetriever);
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
-    limit: 12,
+    limit: 8,
     order: "createdAt",
     search: "",
   });
@@ -408,7 +408,11 @@ export default function Products(props: ProductProps) {
           </Stack>
           <Stack className="pagination-section">
             <Pagination
-              count={totalPages}
+              count={
+                products.length !== 0
+                  ? productSearch.page + 1
+                  : productSearch.page
+              }
               page={productSearch.page}
               onChange={paginationHandler}
               renderItem={(item) => (
