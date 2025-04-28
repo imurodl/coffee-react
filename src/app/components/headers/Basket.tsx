@@ -186,7 +186,9 @@ export default function Basket(props: BasketProps) {
                         fontSize: 16,
                         color: "#fff",
                         backgroundColor: "#1e1e1e",
-                        "&:hover": { backgroundColor: "#6e4b3a" },
+                        "&:hover": {
+                          backgroundColor: "#6e4b3a",
+                        },
                         padding: 0,
                       }}
                     >

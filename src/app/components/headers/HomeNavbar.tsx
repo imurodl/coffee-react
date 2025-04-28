@@ -71,7 +71,12 @@ export default function HomeNavbar(props: HomeNavbarProps) {
 
             <Box
               className="top-content-text"
-              sx={{ width: "32%", textAlign: "center" }}
+              sx={{
+                width: "32%",
+                textAlign: "center",
+                cursor: "pointer",
+                "&:hover": { color: "#db9457" },
+              }}
             >
               Free shipping on orders of $35+
             </Box>
@@ -84,9 +89,27 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 gap: 1,
               }}
             >
-              <FacebookIcon sx={{ color: "#fff" }} />
-              <InstagramIcon sx={{ color: "#fff" }} />
-              <TelegramIcon sx={{ color: "#fff" }} />
+              <FacebookIcon
+                sx={{
+                  color: "#fff",
+                  cursor: "pointer",
+                  "&:hover": { color: "#db9457", transition: "all 1s ease" },
+                }}
+              />
+              <InstagramIcon
+                sx={{
+                  color: "#fff",
+                  cursor: "pointer",
+                  "&:hover": { color: "#db9457", transition: "all 1s ease" },
+                }}
+              />
+              <TelegramIcon
+                sx={{
+                  color: "#fff",
+                  cursor: "pointer",
+                  "&:hover": { color: "#db9457", transition: "all 1s ease" },
+                }}
+              />
             </Box>
           </Box>
         </Stack>
@@ -263,7 +286,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               >
                 <MenuItem onClick={handleLogoutRequest}>
                   <ListItemIcon>
-                    <Logout fontSize="small" style={{ color: "blue" }} />
+                    <Logout fontSize="small" style={{ color: "#db9457" }} />
                   </ListItemIcon>
                   Logout
                 </MenuItem>

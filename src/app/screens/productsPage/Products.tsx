@@ -349,6 +349,17 @@ export default function Products(props: ProductProps) {
                         }}
                       >
                         <div className="product-sale">{sizeVolume}</div>
+                        <Box
+                          className="product-left"
+                          sx={{
+                            background:
+                              product.productLeftCount > 5
+                                ? "#10102079"
+                                : "red",
+                          }}
+                        >
+                          {product.productLeftCount} products left
+                        </Box>
                         <Button
                           className="shop-btn"
                           onClick={(e) => {

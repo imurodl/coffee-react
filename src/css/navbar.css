@@ -47,6 +47,11 @@
   text-transform: uppercase;
 }
 
+.home-navbar .top-add .top-add-content .top-content-text:hover {
+  color: #db9457;
+  transition: all 1s ease;
+}
+
 .home-navbar .navbar-cover {
   width: 100%;
   height: 92px;

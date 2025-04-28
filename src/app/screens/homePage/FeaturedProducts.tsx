@@ -88,12 +88,12 @@ export default function FeaturedProducts() {
                     <img src={imagePath} alt="" />
                     <p>{product?.productName}</p>
                     <div>$ {product?.productPrice}</div>
-                    <div className="hidden">select options</div>
+                    <div className="hidden">see product</div>
                   </Box>
                 );
               })
             ) : (
-              <Box className="no-data">Popular products are not available!</Box>
+              <Box className="no-data">Featured products are not available!</Box>
             )}
           </Stack>
           <Button

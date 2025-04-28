@@ -53,7 +53,7 @@
   gap: 21.82px;
 }
 
-.footer-table .table .table-list div {
+.footer-table .table .table-list a {
   color: #fff;
   text-align: center;
   font-family: Raleway;
@@ -63,6 +63,13 @@
   line-height: 24.82px; /* 200.161% */
   letter-spacing: 3px;
   text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.footer-table .table .table-list a:hover {
+  color: #db9457;
+  transition: all 1s ease;
 }
 
 .footer-foot {

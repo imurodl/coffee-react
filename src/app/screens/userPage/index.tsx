@@ -166,7 +166,7 @@ export default function UserPage() {
                   key={index}
                   sx={{
                     transition: "0.3s",
-                    "&:hover": { transform: "scale(1.2)" },
+                    "&:hover": { transform: "scale(1.2)", color: "#db9457" },
                   }}
                 >
                   {icon}
@@ -217,7 +217,10 @@ export default function UserPage() {
                   fontWeight: 600,
                   textTransform: "uppercase",
                   transition: "all 0.3s",
-                  ":hover": { bgcolor: "#DB9457", color: "white" },
+                  ":hover": {
+                    bgcolor: "#DB9457",
+                    color: "white",
+                  },
                 }}
               >
                 Upload Image
@@ -275,7 +278,10 @@ export default function UserPage() {
                   textTransform: "uppercase",
                   fontWeight: 600,
                   letterSpacing: "2px",
-                  ":hover": { bgcolor: "#DB9457", color: "#101020" },
+                  ":hover": {
+                    bgcolor: "#DB9457",
+                    color: "#101020",
+                  },
                 }}
               >
                 Save Changes

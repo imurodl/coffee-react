@@ -36,56 +36,34 @@ export default function NewDishes() {
           <Typography className="info-subt">fresh menu</Typography>
           <Typography className="info-title">Now Roasting</Typography>
           <Divider width="2" height="40" bg="#DB9457" />
-          <Stack className="cards-frame">
-            <CssVarsProvider>
-              {newDishes.length !== 0 ? (
-                newDishes.map((product: Product) => {
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
-                  const sizeVolume =
-                    product.productCollection === ProductCollection.DRINK
-                      ? product.productVolume + "l"
-                      : product.productSize + " size";
-                  return (
-                    <Card
-                      key={product._id}
-                      variant="outlined"
-                      className={"card"}
-                      onClick={() => choseDishHandler(product._id)}
-                    >
-                      <CardOverflow>
-                        <div className="product-sale">{sizeVolume}</div>
-                        <AspectRatio ratio={1}>
-                          <img src={imagePath} alt="" />
-                        </AspectRatio>
-                      </CardOverflow>
-                      <CardOverflow variant="soft" className="product-detail">
-                        <Stack className="info">
-                          <Stack flexDirection={"row"}>
-                            <Typography className="title">
-                              {product.productName}
-                            </Typography>
-                            <Divider width="2" height="24" bg="#d9d9d9" />
-                            <Typography className="price">
-                              {product.productPrice}$
-                            </Typography>
-                          </Stack>
-                          <Stack>
-                            <Typography className="views">
-                              {product.productViews}
-                              <VisibilityIcon
-                                sx={{ fontSize: 20, marginLeft: "5px" }}
-                              />
-                            </Typography>
-                          </Stack>
-                        </Stack>
-                      </CardOverflow>
-                    </Card>
-                  );
-                })
-              ) : (
-                <Box className="no-data">New products are not available!</Box>
-              )}
-            </CssVarsProvider>
+
+          <Stack className="cards-wrapper">
+            {newDishes.length !== 0 ? (
+              newDishes.map((product) => {
+                const imagePath = `${serverApi}/${product.productImages[0]}`;
+                const sizeVolume =
+                  product.productCollection === ProductCollection.DRINK
+                    ? `${product.productVolume}L`
+                    : `${product.productSize} size`;
+
+                return (
+                  <Box
+                    key={product._id}
+                    className="card"
+                    onClick={() => choseDishHandler(product._id)}
+                  >
+                    <div className="badge">{sizeVolume}</div>
+                    <img src={imagePath} alt="" />
+                    <p className="product-name">{product.productName}</p>
+                    <p className="product-price">${product.productPrice}</p>
+
+                    <div className="hidden">see product</div>
+                  </Box>
+                );
+              })
+            ) : (
+              <Box className="no-data">New products are not available!</Box>
+            )}
           </Stack>
         </Stack>
       </Container>

@@ -313,7 +313,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
         </Stack>
         <Box
           m={"48px 0 20px 0"}
-          fontSize={"24px"}
+          fontSize={"22px"}
           color={"#101020"}
           textAlign={"center"}
           fontFamily={"Raleway"}
@@ -325,7 +325,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
           Related products
         </Box>
         <Stack className="related-products">
-          {relatedProducts.length !== 0 ? (
+          {relatedProducts.length > 1 ? (
             relatedProducts
               .filter((product) => product._id !== chosenProduct._id)
               .map((product: Product) => {
@@ -364,7 +364,23 @@ export default function ChosenProduct(props: ChosenProductProps) {
                 );
               })
           ) : (
-            <Box className="no-data">Products are not available!</Box>
+            <Box
+              className="no-data"
+              width={"100%"}
+              height={"200px"}
+              display={"flex"}
+              alignItems={"center"}
+              textTransform={"capitalize"}
+              justifyContent={"center"}
+              fontFamily={"Poppins"}
+              fontStyle={"normal"}
+              fontWeight={"400"}
+              fontSize={"24px"}
+              lineHeight={"34px"}
+              color={"#e3c08d"}
+            >
+              Related products not found!
+            </Box>
           )}
         </Stack>
       </Container>

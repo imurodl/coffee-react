@@ -146,12 +146,6 @@
   border-radius: 5px;
 }
 
-/* .list-category-section .product-wrapper .product-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  transition: 1ms ease;
-} */
-
 .list-category-section .product-wrapper .product-card .product-img {
   width: 292.25px;
   height: 408.66px;
@@ -174,7 +168,9 @@
 }
 .products-page .products .product-card:hover .product-img:before {
   opacity: 1;
+  transition: all 1s ease;
 }
+
 .products-page .products .product-img img {
   position: absolute;
   display: block;
@@ -199,6 +195,26 @@
   box-shadow: 4px 6px 20px #0000001a;
   background: #db9457;
   color: #fff;
+}
+
+.products-page .products .product-img .product-left {
+  position: absolute;
+  margin: 10px;
+  width: 114px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Raleway";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 21px;
+  border-radius: 5px;
+  box-shadow: 4px 6px 20px #0000001a;
+  color: #fff;
+  /* top: 40px; */
+  opacity: 0;
 }
 
 .products-page .products .shop-btn {
@@ -251,10 +267,21 @@
 
 .products-page .products .product-card:hover .view-btn {
   opacity: 1;
+  transition: all 1s ease;
 }
 
 .products-page .products .product-card:hover .shop-btn {
   opacity: 1;
+  transition: all 1s ease;
+}
+
+.products-page .products .product-card:hover .product-left {
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+.products-page .products .product-card:hover .product-sale {
+  opacity: 0;
 }
 
 .products-page .products .product-card .product-desc {
@@ -429,7 +456,7 @@
   opacity: 0;
   color: #db9457;
   text-align: center;
-  font-family: Raleway;
+  font-family: "Raleway";
   font-size: 14px;
   font-style: normal;
   font-weight: 600;

@@ -25,10 +25,10 @@ const popularDishesRetriever = createSelector(
 
 export default function PopularDishes() {
   const history = useHistory();
-    const choseDishHandler = (id: string) => {
-      history.push(`/products/${id}`);
-    };
-    
+  const choseDishHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
+
   const { popularDishes } = useSelector(popularDishesRetriever);
 
   return (
@@ -44,7 +44,11 @@ export default function PopularDishes() {
                 popularDishes.map((ele: Product) => {
                   const imagePath = `${serverApi}/${ele.productImages[0]}`;
                   return (
-                    <Card key={ele._id} className={"card"} onClick={() => choseDishHandler(ele._id)}>
+                    <Card
+                      key={ele._id}
+                      className={"card"}
+                      onClick={() => choseDishHandler(ele._id)}
+                    >
                       <CardCover>
                         <img src={imagePath} alt="" />
                       </CardCover>

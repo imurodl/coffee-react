@@ -180,6 +180,17 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                     // variant="contained"
                     className="login-button"
                     onClick={() => setLoginOpen(true)}
+                    sx={{
+                      color: "#101020",
+                      textAlign: "center",
+                      fontFamily: "Raleway",
+                      fontSize: "12.9px",
+                      fontStyle: "normal",
+                      fontWeight: "600",
+                      lineHeight: "29.75px",
+                      letterSpacing: "2px",
+                      textTransform: "uppercase",
+                    }}
                   >
                     Login
                   </Button>
@@ -235,7 +246,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
               >
                 <MenuItem onClick={handleLogoutRequest}>
                   <ListItemIcon>
-                    <Logout fontSize="small" style={{ color: "blue" }} />
+                    <Logout fontSize="small" style={{ color: "#db9457" }} />
                   </ListItemIcon>
                   Logout
                 </MenuItem>
