@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/coffee-react/static/css/main.e22029c6.css",
-    "main.js": "/coffee-react/static/js/main.6d14aded.js",
+    "main.js": "/coffee-react/static/js/main.e3dff472.js",
     "static/js/787.15b3f6e6.chunk.js": "/coffee-react/static/js/787.15b3f6e6.chunk.js",
     "static/media/banner.png": "/coffee-react/static/media/banner.5d7345c50d31f5210e09.png",
     "static/media/amaya-banner.png": "/coffee-react/static/media/amaya-banner.86c5eb1fa8384925eec3.png",
@@ -26,11 +26,11 @@
     "static/media/raleway-vietnamese-400-normal.woff": "/coffee-react/static/media/raleway-vietnamese-400-normal.b1a419d3ead111471ac7.woff",
     "index.html": "/coffee-react/index.html",
     "main.e22029c6.css.map": "/coffee-react/static/css/main.e22029c6.css.map",
-    "main.6d14aded.js.map": "/coffee-react/static/js/main.6d14aded.js.map",
+    "main.e3dff472.js.map": "/coffee-react/static/js/main.e3dff472.js.map",
     "787.15b3f6e6.chunk.js.map": "/coffee-react/static/js/787.15b3f6e6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e22029c6.css",
-    "static/js/main.6d14aded.js"
+    "static/js/main.e3dff472.js"
   ]
 }
