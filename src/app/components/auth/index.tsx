@@ -141,7 +141,11 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       >
         <Fade in={signupOpen}>
           <Box className={classes.paper}>
-            <ModalImage src="/img/amaya-hero.webp" alt="Signup Banner" />
+            <ModalImage
+              src="https://hillsbros.com/cdn/shop/articles/coffee_roasting_1728x.jpg?v=1723686434"
+              alt="Signup Banner"
+              className="auth-modal-banner"
+            />
             <Typography
               variant="h5"
               align="center"
@@ -245,7 +249,10 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       >
         <Fade in={loginOpen}>
           <Box className={classes.paper}>
-            <ModalImage src="/img/amaya-hero.webp" alt="Login Banner" />
+            <ModalImage
+              src="https://hillsbros.com/cdn/shop/articles/coffee_roasting_1728x.jpg?v=1723686434"
+              alt="Login Banner"
+            />
             <Typography
               variant="h5"
               align="center"

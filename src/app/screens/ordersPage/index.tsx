@@ -25,6 +25,7 @@ import FinishedOrders from "./FinishedOrders";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PaymentIcon from "@mui/icons-material/Payment";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 export default function OrdersPage() {
   const [value, setValue] = useState("1");
@@ -167,21 +168,18 @@ export default function OrdersPage() {
               </Stack>
 
               <Stack direction="row" justifyContent="center" spacing={2} mt={3}>
-                <img
-                  src="/icons/visa-card.svg"
-                  alt="Visa"
-                  style={{ width: 50 }}
-                />
-                <img
-                  src="/icons/master-card.svg"
-                  alt="MasterCard"
-                  style={{ width: 50 }}
-                />
-                <img
-                  src="/icons/paypal-card.svg"
-                  alt="Paypal"
-                  style={{ width: 50 }}
-                />
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  spacing={2}
+                  mt={3}
+                >
+                  <CreditCardIcon sx={{ fontSize: 40, color: "#4e5b3e" }} />
+                  <PaymentIcon sx={{ fontSize: 40, color: "#4e5b3e" }} />
+                  <AccountBalanceWalletIcon
+                    sx={{ fontSize: 40, color: "#4e5b3e" }}
+                  />
+                </Stack>
               </Stack>
             </Box>
           </Grid>

@@ -1,6 +1,6 @@
 // First: PausedOrders.tsx
 import React from "react";
-import { Box, Stack, Button } from "@mui/material";
+import { Box, Stack, Button, Typography } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -184,12 +184,15 @@ export default function PausedOrders({ setValue }: OrdersProps) {
             </Box>
           ))
         ) : (
-          <Box display="flex" justifyContent="center">
-            <img
-              src="/icons/noimage-list.svg"
-              alt="no orders"
-              style={{ width: 300, height: 300 }}
-            />
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="300px"
+          >
+            <Typography color="text.secondary">
+              No paused orders yet.
+            </Typography>
           </Box>
         )}
       </Stack>

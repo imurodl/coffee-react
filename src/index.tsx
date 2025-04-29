@@ -8,7 +8,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./app/MaterialTheme";
 import "./css/index.css";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { HashRouter, Switch, Route, Link } from "react-router-dom";
 import ContextProvider from "./app/context/ContextProvider";
 import ScrollToTop from "./app/components/headers/ScrollToTop";
 
@@ -21,10 +21,10 @@ root.render(
       <ContextProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <BrowserRouter>
+          <HashRouter>
             <ScrollToTop />
             <App />
-          </BrowserRouter>
+          </HashRouter>
         </ThemeProvider>
       </ContextProvider>
     </Provider>

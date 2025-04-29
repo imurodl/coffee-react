@@ -138,11 +138,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
 
             <Box sx={{ justifySelf: "center" }}>
               <NavLink to="/">
-                <img
-                  height={"44px"}
-                  src={"/img/amaya-logo.png"}
-                  className="brand-logo"
-                />
+                <div className="brand-logo"></div>
               </NavLink>
             </Box>
 

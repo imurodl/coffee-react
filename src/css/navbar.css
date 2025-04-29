@@ -162,6 +162,7 @@
 .home-navbar .navbar-container .header-frame .detail .head-main-txt {
   width: 423.035px;
   margin-top: 8px;
+  margin-bottom: 20px;
   color: #101020;
   font-family: "Playfair Display";
   font-size: 53.1px;
@@ -195,7 +196,23 @@
   color: #fff;
 }
 
+.home-navbar .navbar-cover .menu .brand-logo {
+  height: 44px;
+  width: 106px;
+  background: url("/public/img/amaya-logo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 /****************************   OTHER NAVBAR  ******************************/
+
+.other-navbar .navbar-cover .menu .brand-logo {
+  height: 44px;
+  width: 106px;
+  background: url("/public/img/amaya-logo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 .other-navbar {
   width: 100%;

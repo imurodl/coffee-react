@@ -3,6 +3,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import { plans } from "../../../lib/data/plans";
 import Divider from "../../components/divider";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -38,7 +41,11 @@ export default function Events() {
             return (
               <SwiperSlide key={number} className={"events-info-frame"}>
                 <div className={"events-img"}>
-                  <img src={value.img} className={"events-img"} />
+                  <img
+                    src={`${process.env.PUBLIC_URL}${value.img}`}
+                    alt="Event"
+                    className={"events-img"}
+                  />
                 </div>
                 <Box className={"events-desc"}>
                   <Box className={"events-bott"}>
@@ -48,7 +55,7 @@ export default function Events() {
                           on {value.date}
                         </Stack>
                         <Stack className={"bott-info-main"}>
-                          <img src={"/icons/location.svg"} />
+                          <LocationOnIcon />
                           {value.location}
                         </Stack>
                       </div>
@@ -71,16 +78,9 @@ export default function Events() {
           })}
         </Swiper>
         <Box className={"prev-next-frame"}>
-          <img
-            src={"/icons/arrow-right.svg"}
-            className={"swiper-button-prev"}
-          />
+          <ArrowBackIcon className={"swiper-button-prev"} />
           <div className={"dot-frame-pagination swiper-pagination"}></div>
-          <img
-            src={"/icons/arrow-right.svg"}
-            className={"swiper-button-next"}
-            style={{ transform: "rotate(-180deg)" }}
-          />
+          <ArrowForwardIcon className={"swiper-button-next"} />
         </Box>
       </Stack>
     </div>
