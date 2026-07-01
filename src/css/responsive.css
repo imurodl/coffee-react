@@ -167,6 +167,21 @@ img {
     box-sizing: border-box;
   }
 
+  /* --- Products page: stack the SHOP title above the search bar --- */
+  .products-page .products .avatar-big-box .top-text {
+    flex-direction: column !important;
+    height: auto !important;
+    gap: 16px;
+  }
+  .products-page .products .avatar-big-box .top-text .top-text-title {
+    position: static !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  .products-page .products .avatar-big-box .top-text .spacer {
+    display: none;
+  }
+
   /* --- Products page: wrap filter chips instead of overflowing --- */
   .dishes-filter-section .dishes-filter-box,
   .list-category-section .product-category .category-main {

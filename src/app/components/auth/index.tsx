@@ -145,7 +145,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
         <Fade in={signupOpen}>
           <Box sx={paperSx}>
             <ModalImage
-              src="https://hillsbros.com/cdn/shop/articles/coffee_roasting_1728x.jpg?v=1723686434"
+              src="/img/coffee-featured.jpg"
               alt="Signup Banner"
               className="auth-modal-banner"
             />
@@ -253,7 +253,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
         <Fade in={loginOpen}>
           <Box sx={paperSx}>
             <ModalImage
-              src="https://hillsbros.com/cdn/shop/articles/coffee_roasting_1728x.jpg?v=1723686434"
+              src="/img/coffee-featured.jpg"
               alt="Login Banner"
             />
             <Typography
