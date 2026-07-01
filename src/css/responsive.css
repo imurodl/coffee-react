@@ -167,6 +167,25 @@ img {
     box-sizing: border-box;
   }
 
+  /* --- Products page: wrap filter chips instead of overflowing --- */
+  .dishes-filter-section .dishes-filter-box,
+  .list-category-section .product-category .category-main {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .list-category-section .product-category .category-main button {
+    width: auto;
+    min-width: 120px;
+    padding: 0 16px;
+  }
+  .dishes-filter-section,
+  .list-category-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 12px;
+  }
+
   /* --- Footer: stack the columns --- */
   .footer-table {
     width: 100% !important;

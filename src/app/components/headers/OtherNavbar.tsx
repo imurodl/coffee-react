@@ -2,12 +2,18 @@ import {
   Box,
   Button,
   Container,
+  Drawer,
+  IconButton,
+  List,
+  ListItemButton,
   ListItemIcon,
   Menu,
   MenuItem,
   Stack,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import { NavLink, useHistory } from "react-router-dom";
 import Basket from "./Basket";
 import { CartItem } from "../../../lib/types/search";
 import { useGlobals } from "../../hooks/useGlobals";
@@ -50,6 +56,12 @@ export default function OtherNavbar(props: OtherNavbarProps) {
 
   const { authMember } = useGlobals();
   const [scrollY, setScrollY] = useState(0);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const history = useHistory();
+  const goTo = (path: string) => {
+    setMobileOpen(false);
+    history.push(path);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,21 +131,40 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                 alignItems: "center",
               }}
             >
-              <Box className={"hover-line"}>
-                <NavLink to="/">Home</NavLink>
-              </Box>
-              <Box className={"hover-line"}>
-                <NavLink to="/products" activeClassName="underline">
-                  Products
-                </NavLink>
-              </Box>
-              {authMember ? (
+              <IconButton
+                aria-label="Open navigation menu"
+                onClick={() => setMobileOpen(true)}
+                sx={{
+                  display: { xs: "inline-flex", md: "none" },
+                  color: "#101020",
+                  p: 0.5,
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  gap: "4rem",
+                  alignItems: "center",
+                }}
+              >
                 <Box className={"hover-line"}>
-                  <NavLink to="/orders" activeClassName="underline">
-                    Orders
+                  <NavLink to="/">Home</NavLink>
+                </Box>
+                <Box className={"hover-line"}>
+                  <NavLink to="/products" activeClassName="underline">
+                    Products
                   </NavLink>
                 </Box>
-              ) : null}
+                {authMember ? (
+                  <Box className={"hover-line"}>
+                    <NavLink to="/orders" activeClassName="underline">
+                      Orders
+                    </NavLink>
+                  </Box>
+                ) : null}
+              </Box>
             </Box>
 
             <Box sx={{ justifySelf: "center" }}>
@@ -151,13 +182,19 @@ export default function OtherNavbar(props: OtherNavbarProps) {
               }}
             >
               {authMember ? (
-                <Box className={"hover-line"}>
+                <Box
+                  className={"hover-line"}
+                  sx={{ display: { xs: "none", md: "block" } }}
+                >
                   <NavLink to="/member-page" activeClassName="underline">
                     My Page
                   </NavLink>
                 </Box>
               ) : null}
-              <Box className={"hover-line"}>
+              <Box
+                className={"hover-line"}
+                sx={{ display: { xs: "none", md: "block" } }}
+              >
                 <NavLink to="/help" activeClassName="underline">
                   Help
                 </NavLink>
@@ -171,7 +208,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                 onDeleteAll={onDeleteAll}
               />
               {!authMember ? (
-                <Box>
+                <Box sx={{ display: { xs: "none", md: "block" } }}>
                   <Button
                     // variant="contained"
                     className="login-button"
@@ -249,6 +286,61 @@ export default function OtherNavbar(props: OtherNavbarProps) {
               </Menu>
             </Box>
           </Box>
+
+          <Drawer
+            anchor="right"
+            open={mobileOpen}
+            onClose={() => setMobileOpen(false)}
+          >
+            <Box sx={{ width: 250 }} role="presentation">
+              <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
+                <IconButton
+                  aria-label="Close navigation menu"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Box>
+              <List>
+                <ListItemButton onClick={() => goTo("/")}>Home</ListItemButton>
+                <ListItemButton onClick={() => goTo("/products")}>
+                  Products
+                </ListItemButton>
+                <ListItemButton onClick={() => goTo("/help")}>
+                  Help
+                </ListItemButton>
+                {authMember && (
+                  <ListItemButton onClick={() => goTo("/orders")}>
+                    Orders
+                  </ListItemButton>
+                )}
+                {authMember && (
+                  <ListItemButton onClick={() => goTo("/member-page")}>
+                    My Page
+                  </ListItemButton>
+                )}
+                {authMember ? (
+                  <ListItemButton
+                    onClick={() => {
+                      setMobileOpen(false);
+                      handleLogoutRequest();
+                    }}
+                  >
+                    Logout
+                  </ListItemButton>
+                ) : (
+                  <ListItemButton
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setLoginOpen(true);
+                    }}
+                  >
+                    Login
+                  </ListItemButton>
+                )}
+              </List>
+            </Box>
+          </Drawer>
         </Stack>
       </Container>
     </div>
