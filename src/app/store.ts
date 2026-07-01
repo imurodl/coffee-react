@@ -6,7 +6,7 @@ import OrdersPageReducer from "./screens/ordersPage/slice";
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
-    process.env.NODE_ENV === "production"
+    import.meta.env.PROD
       ? getDefaultMiddleware()
       : // @ts-ignore
         getDefaultMiddleware().concat(reduxLogger),
