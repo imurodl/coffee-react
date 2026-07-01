@@ -125,6 +125,7 @@ export default function Products(props: ProductProps) {
                 <input
                   type="search"
                   name="singleSearch"
+                  aria-label="Search products"
                   className="search-input"
                   placeholder="Type here..."
                   value={searchText}
@@ -338,10 +339,21 @@ export default function Products(props: ProductProps) {
                     <Stack
                       key={product._id}
                       className="product-card"
+                      role="button"
+                      tabIndex={0}
+                      aria-label={product.productName}
                       onClick={() => choseDishHandler(product._id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          choseDishHandler(product._id);
+                        }
+                      }}
                     >
                       <Stack
                         className="product-img"
+                        role="img"
+                        aria-label={product.productName}
                         sx={{
                           backgroundImage: `url(${imagePath})`,
                           backgroundRepeat: "no-repeat",

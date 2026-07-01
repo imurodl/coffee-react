@@ -9,53 +9,38 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: yarn
+          node-version: '20'
+
+      - run: corepack enable
 
       - run: yarn install --frozen-lockfile
 
       - name: Build
-        run: yarn build
+        run: CI=false yarn build
         env:
-          CI: false
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL || 'https://api.amaya.uz' }}
 
   deploy:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
+      # Requires repo secrets OCI_HOST, OCI_USER, OCI_SSH_KEY.
+      # REACT_APP_API_URL lives in .env on the server; nginx serves ./build.
+      - name: Deploy to OCI via SSH
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          command_timeout: 30m
-          timeout: 60s
+          host: ${{ secrets.OCI_HOST }}
+          username: ${{ secrets.OCI_USER }}
+          key: ${{ secrets.OCI_SSH_KEY }}
+          command_timeout: 20m
           script: |
             set -e
             cd /home/max/amaya-project/coffee-react
             git fetch origin master
             git reset --hard origin/master
-            yarn install --frozen-lockfile
-            CI=false yarn build
-
-      - name: Retry deploy on failure
-        if: failure()
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          command_timeout: 30m
-          timeout: 120s
-          script: |
-            set -e
-            cd /home/max/amaya-project/coffee-react
-            git fetch origin master
-            git reset --hard origin/master
-            yarn install --frozen-lockfile
-            CI=false yarn build
+            corepack yarn@1.22.22 install --frozen-lockfile
+            CI=false corepack yarn@1.22.22 build

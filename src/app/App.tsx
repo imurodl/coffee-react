@@ -1,10 +1,5 @@
-import React, { useState } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
-import HomePage from "./screens/homePage";
-import ProductsPage from "./screens/productsPage";
-import OrdersPage from "./screens/ordersPage";
-import UserPage from "./screens/userPage";
-import HelpPage from "./screens/helpPage";
 import HomeNavbar from "./components/headers/HomeNavbar";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer";
@@ -20,7 +15,14 @@ import { Messages } from "../lib/config";
 import MemberService from "./services/MemberService";
 import { useGlobals } from "./hooks/useGlobals";
 import "@fontsource/playfair-display";
-import "@fontsource/raleway"; 
+import "@fontsource/raleway";
+
+// Route-level code splitting: each screen loads as its own chunk.
+const HomePage = lazy(() => import("./screens/homePage"));
+const ProductsPage = lazy(() => import("./screens/productsPage"));
+const OrdersPage = lazy(() => import("./screens/ordersPage"));
+const UserPage = lazy(() => import("./screens/userPage"));
+const HelpPage = lazy(() => import("./screens/helpPage"));
 
 function App() {
   const location = useLocation();
@@ -82,23 +84,25 @@ function App() {
           handleLogoutRequest={handleLogoutRequest}
         />
       )}
-      <Switch>
-        <Route path="/products">
-          <ProductsPage onAdd={onAdd} />
-        </Route>
-        <Route path="/orders">
-          <OrdersPage />
-        </Route>
-        <Route path="/member-page">
-          <UserPage />
-        </Route>
-        <Route path="/help">
-          <HelpPage />
-        </Route>
-        <Route path="/">
-          <HomePage />
-        </Route>
-      </Switch>
+      <Suspense fallback={null}>
+        <Switch>
+          <Route path="/products">
+            <ProductsPage onAdd={onAdd} />
+          </Route>
+          <Route path="/orders">
+            <OrdersPage />
+          </Route>
+          <Route path="/member-page">
+            <UserPage />
+          </Route>
+          <Route path="/help">
+            <HelpPage />
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+      </Suspense>
       <Footer />
 
       <AuthenticationModal
