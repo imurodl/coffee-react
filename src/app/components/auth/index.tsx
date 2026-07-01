@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import { Fab, Stack, TextField, Typography, Box, Button } from "@mui/material";
+import {
+  Fab,
+  Stack,
+  TextField,
+  Typography,
+  Box,
+  Button,
+  Modal,
+  Backdrop,
+  Fade,
+} from "@mui/material";
 import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
 import { T } from "../../../lib/types/common";
@@ -13,21 +19,21 @@ import MemberService from "../../services/MemberService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: "12px",
-    padding: theme.spacing(4),
-    boxShadow: theme.shadows[10],
-    width: "400px",
-    outline: "none",
-  },
-}));
+const modalSx = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const paperSx = {
+  bgcolor: "background.paper",
+  borderRadius: "12px",
+  p: 4,
+  boxShadow: 10,
+  width: { xs: "90vw", sm: "400px" },
+  maxWidth: "400px",
+  outline: "none",
+};
 
 const ModalImage = styled.img`
   width: 100%;
@@ -46,7 +52,6 @@ interface AuthenticationModalProps {
 
 export default function AuthenticationModal(props: AuthenticationModalProps) {
   const { signupOpen, loginOpen, handleSignupClose, handleLoginClose } = props;
-  const classes = useStyles();
   const [memberNick, setMemberNick] = useState<string>("");
   const [memberPhone, setMemberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
@@ -130,15 +135,15 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       <Modal
         aria-labelledby="signup-modal-title"
         aria-describedby="signup-modal-description"
-        className={classes.modal}
+        sx={modalSx}
         open={signupOpen}
         onClose={handleSignupClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{ timeout: 500 }}
+        slots={{ backdrop: Backdrop }}
+        slotProps={{ backdrop: { timeout: 500 } }}
       >
         <Fade in={signupOpen}>
-          <Box className={classes.paper}>
+          <Box sx={paperSx}>
             <ModalImage
               src="https://hillsbros.com/cdn/shop/articles/coffee_roasting_1728x.jpg?v=1723686434"
               alt="Signup Banner"
@@ -238,15 +243,15 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       <Modal
         aria-labelledby="login-modal-title"
         aria-describedby="login-modal-description"
-        className={classes.modal}
+        sx={modalSx}
         open={loginOpen}
         onClose={handleLoginClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{ timeout: 500 }}
+        slots={{ backdrop: Backdrop }}
+        slotProps={{ backdrop: { timeout: 500 } }}
       >
         <Fade in={loginOpen}>
-          <Box className={classes.paper}>
+          <Box sx={paperSx}>
             <ModalImage
               src="https://hillsbros.com/cdn/shop/articles/coffee_roasting_1728x.jpg?v=1723686434"
               alt="Login Banner"

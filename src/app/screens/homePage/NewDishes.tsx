@@ -1,11 +1,5 @@
 import React from "react";
-import { Container, Stack, Box } from "@mui/material";
-import AspectRatio from "@mui/joy/AspectRatio";
-import Card from "@mui/joy/Card";
-import CardOverflow from "@mui/joy/CardOverflow";
-import Typography from "@mui/joy/Typography";
-import { CssVarsProvider } from "@mui/joy/styles";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Container, Stack, Box, Typography } from "@mui/material";
 import Divider from "../../components/divider";
 
 import { useSelector } from "react-redux";
