@@ -96,7 +96,7 @@ export default function PausedOrders({ setValue }: OrdersProps) {
                     >
                       <img
                         src={imagePath}
-                        alt=""
+                        alt={product.productName}
                         style={{
                           width: 60,
                           height: 60,

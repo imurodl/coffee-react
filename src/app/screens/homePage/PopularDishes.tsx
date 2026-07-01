@@ -50,7 +50,7 @@ export default function PopularDishes() {
                       onClick={() => choseDishHandler(ele._id)}
                     >
                       <CardCover>
-                        <img src={imagePath} alt="" />
+                        <img src={imagePath} alt={ele.productName} loading="lazy" />
                       </CardCover>
                       <CardCover className="card-cover" />
                       <CardContent sx={{ justifyContent: "flex-end" }}>

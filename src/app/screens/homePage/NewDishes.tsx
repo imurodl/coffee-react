@@ -53,7 +53,7 @@ export default function NewDishes() {
                     onClick={() => choseDishHandler(product._id)}
                   >
                     <div className="badge">{sizeVolume}</div>
-                    <img src={imagePath} alt="" />
+                    <img src={imagePath} alt={product.productName} loading="lazy" />
                     <p className="product-name">{product.productName}</p>
                     <p className="product-price">${product.productPrice}</p>
 

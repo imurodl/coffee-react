@@ -85,7 +85,7 @@ export default function FeaturedProducts() {
                     id={product._id}
                     onClick={() => choseDishHandler(product._id)}
                   >
-                    <img src={imagePath} alt="" />
+                    <img src={imagePath} alt={product.productName} loading="lazy" />
                     <p>{product?.productName}</p>
                     <div>$ {product?.productPrice}</div>
                     <div className="hidden">see product</div>
