@@ -15,27 +15,31 @@ const Footers = styled.div`
   background-size: cover;
 `;
 
-export default function Footer() {
-  const authMember = null;
+const socialIconSx = {
+  color: "#fff",
+  cursor: "pointer",
+  "&:hover": { color: "#db9457", transition: "all 1s ease" },
+};
 
+export default function Footer() {
   return (
     <Footers>
       <Container>
         <Stack className="footer-table" flexDirection={"row"}>
           <Stack className="table">
-            <Typography className="table-list-head">about</Typography>
+            <Typography className="table-list-head">explore</Typography>
             <Stack className="table-list">
-              <a href="/#">The Company</a>
-              <a href="/help">Faq</a>
-              <a href="/help">Privacy Policy</a>
+              <Link to="/">Home</Link>
+              <Link to="/products">Shop Coffee</Link>
+              <Link to="/help">Help &amp; Contact</Link>
             </Stack>
           </Stack>
           <Stack className="table">
-            <Typography className="table-list-head">locations</Typography>
+            <Typography className="table-list-head">company</Typography>
             <Stack className="table-list">
-              <a href="/#">The Company</a>
-              <a href="/help">Faq</a>
-              <a href="/help">Privacy Policy</a>
+              <Link to="/help">About Us</Link>
+              <Link to="/help">FAQ</Link>
+              <Link to="/help">Privacy Policy</Link>
             </Stack>
           </Stack>
           <Stack className="table table-last">
@@ -47,40 +51,44 @@ export default function Footer() {
               width={"352px"}
               justifyContent={"center"}
             >
-              <FacebookIcon
-                sx={{
-                  color: "#fff",
-                  cursor: "pointer",
-                  "&:hover": { color: "#db9457", transition: "all 1s ease" },
-                }}
-              />
-              <InstagramIcon
-                sx={{
-                  color: "#fff",
-                  cursor: "pointer",
-                  "&:hover": { color: "#db9457", transition: "all 1s ease" },
-                }}
-              />
-              <TelegramIcon
-                sx={{
-                  color: "#fff",
-                  cursor: "pointer",
-                  "&:hover": { color: "#db9457", transition: "all 1s ease" },
-                }}
-              />
+              <a
+                href="https://facebook.com/amayacoffee"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Amaya on Facebook"
+              >
+                <FacebookIcon sx={socialIconSx} />
+              </a>
+              <a
+                href="https://instagram.com/amayacoffee"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Amaya on Instagram"
+              >
+                <InstagramIcon sx={socialIconSx} />
+              </a>
+              <a
+                href="https://t.me/amayacoffee"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Amaya on Telegram"
+              >
+                <TelegramIcon sx={socialIconSx} />
+              </a>
             </Stack>
           </Stack>
         </Stack>
         <Stack className="footer-foot" flexDirection={"row"}>
           <Box sx={{ width: "33%" }} component={"div"}>
             <Typography component={"p"}>
-              © 2020 amaya. All Rights Reserved.
+              © {new Date().getFullYear()} Amaya Roasting Co. All Rights
+              Reserved.
             </Typography>
           </Box>
           <Box sx={{ width: "33%", textAlign: "center" }}>
             <img
               src="/img/amaya-white.png"
-              alt=""
+              alt="Amaya Roasting Co."
               style={{ width: "96.36px" }}
             />
           </Box>

@@ -80,14 +80,14 @@ export default function ChosenProduct(props: ChosenProductProps) {
       .then((data) => {
         setChosenProduct(data);
       })
-      .catch((err) => console.log(err));
+      .catch(() => {});
 
     // Load restaurant info
     const member = new MemberService();
     member
       .getRestaurant()
       .then((data) => setRestaurant(data))
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }, [productId]);
 
   /* HANDLERS */
@@ -110,7 +110,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
     product
       .getProducts(searchInput)
       .then((data) => setRelatedProducts(data))
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }, [chosenProduct]);
 
   if (!chosenProduct) return null;

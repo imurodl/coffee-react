@@ -82,7 +82,6 @@ export default function UserPage() {
 
       await sweetTopSmallSuccessAlert("Modified successfully", 1000);
     } catch (err) {
-      console.log(err);
       sweetErrorHandling(err);
     }
   };

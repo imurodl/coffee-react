@@ -44,17 +44,17 @@ export default function OrdersPage() {
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PAUSE })
       .then((data) => dispatch(setPausedOrders(data)))
-      .catch((err) => console.log(err));
+      .catch(() => {});
 
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PROCESS })
       .then((data) => dispatch(setProcessOrders(data)))
-      .catch((err) => console.log(err));
+      .catch(() => {});
 
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
       .then((data) => dispatch(setFinishedOrders(data)))
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }, [orderInquiry, orderBuilder]);
 
   const handleTabChange = (e: SyntheticEvent, newValue: string) => {

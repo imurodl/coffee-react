@@ -47,7 +47,6 @@ export default function ProcessOrders({ setValue }: OrdersProps) {
         setValue("3");
       }
     } catch (err) {
-      console.log(err);
       sweetErrorHandling(err);
     }
   };

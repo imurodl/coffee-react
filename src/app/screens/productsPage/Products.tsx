@@ -52,7 +52,7 @@ export default function Products(props: ProductProps) {
     product
       .getProducts(productSearch)
       .then((data) => setProducts(data))
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }, [productSearch]);
 
   useEffect(() => {

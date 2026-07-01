@@ -123,6 +123,7 @@ export default function HelpPage() {
                 />
                 <TextField
                   label="Your Email"
+                  type="email"
                   fullWidth
                   sx={{ input: { fontFamily: "Raleway" } }}
                 />

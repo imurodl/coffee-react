@@ -1,46 +1,69 @@
-# Getting Started with Create React App
+# Amaya Frontend ☕️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+Storefront for **Amaya Roasting Co.**, a specialty-coffee e-commerce platform.
+A React single-page app with product browsing, cart and checkout, member
+accounts, order tracking, and real-time updates.
 
-## Available Scripts
+🔗 **Live site**: [https://amaya.uz](https://amaya.uz)
+🔗 **API**: [https://api.amaya.uz](https://api.amaya.uz) ([backend repo](https://github.com/imurodl/coffee))
+🛠️ Built with **React**, **TypeScript**, **Redux Toolkit**, and **MUI**
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Product catalog with collections, search, and pagination
+- Product detail pages with related items
+- Cart and order flow (Paused → Process → Finished)
+- Member accounts and profile management
+- Real-time updates via Socket.IO
+- Responsive layout for desktop and mobile
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧱 Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Framework**: React (Create React App)
+- **Language**: TypeScript
+- **State**: Redux Toolkit + React-Redux
+- **UI**: MUI (Material UI)
+- **HTTP**: Axios
+- **Realtime**: Socket.IO client
+- **Deployment**: Static build served by nginx on OCI
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚙️ Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+# Clone the repository
+git clone https://github.com/imurodl/coffee-react.git
+cd coffee-react
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Install dependencies
+yarn install
 
-### `npm run eject`
+# Start the dev server (http://localhost:3000)
+yarn start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Build for production (outputs to ./build)
+yarn build
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🌱 Environment Variables
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Create a `.env` file in the project root:
 
-## Learn More
+```env
+REACT_APP_API_URL=https://api.amaya.uz
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+See `.env.example` for reference.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## ✨ Author
+
+Built by [@imurodl](https://github.com/imurodl)

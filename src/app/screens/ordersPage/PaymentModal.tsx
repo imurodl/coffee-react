@@ -68,7 +68,6 @@ export default function PaymentModal({
       onClose();
       setActiveStep(0);
     } catch (err) {
-      console.log(err);
       sweetErrorHandling(err);
     }
   };

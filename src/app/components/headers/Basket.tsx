@@ -61,7 +61,6 @@ export default function Basket(props: BasketProps) {
       setOrderBuilder(new Date());
       history.push("/orders");
     } catch (err) {
-      console.log(err);
       sweetErrorHandling(err).then();
     }
   };

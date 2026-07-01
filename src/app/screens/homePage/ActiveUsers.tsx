@@ -48,6 +48,10 @@ export default function ActiveUsers() {
                             src={imagePath}
                             alt={`${member.memberNick}'s photo`}
                             style={{ width: "265.5px" }}
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = "/img/amaya-logo.png";
+                            }}
                           />
                         </AspectRatio>
                       </CardOverflow>
