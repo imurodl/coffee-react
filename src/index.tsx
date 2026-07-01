@@ -7,7 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./app/MaterialTheme";
 import "./css/index.css";
-import { HashRouter, Switch, Route, Link } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import ContextProvider from "./app/context/ContextProvider";
 import ScrollToTop from "./app/components/headers/ScrollToTop";
 import { SocketProvider } from "./app/context/SocketContext";

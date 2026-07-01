@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Basket from "./Basket";
 import React, { useEffect, useState } from "react";
 import { CartItem } from "../../../lib/types/search";
@@ -57,10 +57,10 @@ export default function HomeNavbar(props: HomeNavbarProps) {
   const { authMember } = useGlobals();
   const [scrollY, setScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const goTo = (path: string) => {
     setMobileOpen(false);
-    history.push(path);
+    navigate(path);
   };
 
   useEffect(() => {
@@ -173,18 +173,18 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 }}
               >
                 <Box className={"hover-line"}>
-                  <NavLink to="/" activeClassName="underline">
+                  <NavLink to="/" end className={({ isActive }) => (isActive ? "underline" : "")}>
                     Home
                   </NavLink>
                 </Box>
                 <Box className={"hover-line"}>
-                  <NavLink to="/products" activeClassName="underline">
+                  <NavLink to="/products" className={({ isActive }) => (isActive ? "underline" : "")}>
                     Products
                   </NavLink>
                 </Box>
                 {authMember ? (
                   <Box className={"hover-line"}>
-                    <NavLink to="/orders" activeClassName="underline">
+                    <NavLink to="/orders" className={({ isActive }) => (isActive ? "underline" : "")}>
                       Orders
                     </NavLink>
                   </Box>
@@ -211,7 +211,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                   className={"hover-line"}
                   sx={{ display: { xs: "none", md: "block" } }}
                 >
-                  <NavLink to="/member-page" activeClassName="underline">
+                  <NavLink to="/member-page" className={({ isActive }) => (isActive ? "underline" : "")}>
                     My Page
                   </NavLink>
                 </Box>
@@ -220,7 +220,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 className={"hover-line"}
                 sx={{ display: { xs: "none", md: "block" } }}
               >
-                <NavLink to="/help" activeClassName="underline">
+                <NavLink to="/help" className={({ isActive }) => (isActive ? "underline" : "")}>
                   Help
                 </NavLink>
               </Box>

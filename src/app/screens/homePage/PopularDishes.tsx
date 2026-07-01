@@ -9,7 +9,7 @@ import { retrievePopularDishes } from "./selector";
 import { serverApi } from "../../../lib/config";
 import { Product } from "../../../lib/types/product";
 import Divider from "../../components/divider";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /** REDUC SLICE & SELECTOR */
 const popularDishesRetriever = createSelector(
@@ -18,9 +18,9 @@ const popularDishesRetriever = createSelector(
 );
 
 export default function PopularDishes() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const choseDishHandler = (id: string) => {
-    history.push(`/products/${id}`);
+    navigate(`/products/${id}`);
   };
 
   const { popularDishes } = useSelector(popularDishesRetriever);

@@ -10,7 +10,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { useGlobals } from "../../hooks/useGlobals";
-import { useHistory } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { serverApi, Messages } from "../../../lib/config";
 import { MemberType } from "../../../lib/enums/member.enum";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
@@ -28,9 +28,8 @@ import { T } from "../../../lib/types/common";
 
 export default function UserPage() {
   const { authMember, setAuthMember } = useGlobals();
-  const history = useHistory();
 
-  if (!authMember) history.push("/");
+  if (!authMember) return <Navigate to="/" replace />;
 
   const [img, setImg] = useState<string>(
     authMember?.memberImage

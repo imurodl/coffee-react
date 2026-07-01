@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import HomeNavbar from "./components/headers/HomeNavbar";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer";
@@ -85,23 +85,13 @@ function App() {
         />
       )}
       <Suspense fallback={null}>
-        <Switch>
-          <Route path="/products">
-            <ProductsPage onAdd={onAdd} />
-          </Route>
-          <Route path="/orders">
-            <OrdersPage />
-          </Route>
-          <Route path="/member-page">
-            <UserPage />
-          </Route>
-          <Route path="/help">
-            <HelpPage />
-          </Route>
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/products/*" element={<ProductsPage onAdd={onAdd} />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/member-page" element={<UserPage />} />
+          <Route path="/help" element={<HelpPage />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
       </Suspense>
       <Footer />
 

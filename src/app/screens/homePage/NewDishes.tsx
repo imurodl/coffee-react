@@ -8,7 +8,7 @@ import { retrieveNewDishes } from "./selector";
 import { serverApi } from "../../../lib/config";
 import { Product } from "../../../lib/types/product";
 import { ProductCollection } from "../../../lib/enums/product.enums";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /** REDUC SLICE & SELECTOR */
 const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
@@ -16,9 +16,9 @@ const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
 }));
 
 export default function NewDishes() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const choseDishHandler = (id: string) => {
-    history.push(`/products/${id}`);
+    navigate(`/products/${id}`);
   };
 
   const { newDishes } = useSelector(newDishesRetriever);

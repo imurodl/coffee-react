@@ -21,7 +21,7 @@ import {
   retrieveRestaurant,
 } from "./selector";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 import { serverApi } from "../../../lib/config";
@@ -69,7 +69,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
 
   const { setRelatedProducts } = actionDispatch(useDispatch());
   const { relatedProducts } = useSelector(relatedProductsRetriever);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const product = new ProductService();
@@ -92,7 +92,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
 
   /* HANDLERS */
   const choseDishHandler = (id: string) => {
-    history.push(`/products/${id}`);
+    navigate(`/products/${id}`);
   };
 
   useEffect(() => {

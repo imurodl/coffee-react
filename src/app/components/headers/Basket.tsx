@@ -12,7 +12,7 @@ import {
 import CancelIcon from "@mui/icons-material/Cancel";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
 import { Messages, serverApi } from "../../../lib/config";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
@@ -30,7 +30,7 @@ export interface BasketProps {
 export default function Basket(props: BasketProps) {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
   const { authMember, setOrderBuilder } = useGlobals();
-  const history = useHistory();
+  const navigate = useNavigate();
   const itemsPrice = cartItems.reduce(
     (a: number, c: CartItem) => a + c.price * c.quantity,
     0
@@ -59,7 +59,7 @@ export default function Basket(props: BasketProps) {
 
       onDeleteAll();
       setOrderBuilder(new Date());
-      history.push("/orders");
+      navigate("/orders");
     } catch (err) {
       sweetErrorHandling(err).then();
     }

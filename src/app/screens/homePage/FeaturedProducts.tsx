@@ -6,7 +6,7 @@ import { createSelector } from "reselect";
 import { retrieveFeaturedProducts } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /** REDUC SLICE & SELECTOR */
 const featuredProductsRetriever = createSelector(
@@ -15,9 +15,9 @@ const featuredProductsRetriever = createSelector(
 );
 
 export default function FeaturedProducts() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const choseDishHandler = (id: string) => {
-    history.push(`/products/${id}`);
+    navigate(`/products/${id}`);
   };
 
   const { featuredProducts } = useSelector(featuredProductsRetriever);

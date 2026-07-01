@@ -10,7 +10,7 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import { useHistory } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
@@ -34,7 +34,6 @@ export default function OrdersPage() {
     limit: 8,
     orderStatus: OrderStatus.PAUSE,
   });
-  const history = useHistory();
   const dispatch = useDispatch();
   const { authMember, orderBuilder } = useGlobals();
 
@@ -61,7 +60,7 @@ export default function OrdersPage() {
     setValue(newValue);
   };
 
-  if (!authMember) history.push("/");
+  if (!authMember) return <Navigate to="/" replace />;
 
   return (
     <Box sx={{ bgcolor: "#f8f8ff", minHeight: "100vh", py: 6 }}>
