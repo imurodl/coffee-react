@@ -1,0 +1,226 @@
+/* ===========================================================
+   Responsive overrides for Amaya.
+   The base layout was authored desktop-only with fixed pixel
+   widths and no breakpoints; these rules make it usable on
+   tablets and phones without touching the desktop design.
+   =========================================================== */
+
+/* Global safety net: never allow horizontal scroll, keep media fluid */
+html,
+body {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* -----------------------------------------------------------
+   TABLET AND BELOW
+   ----------------------------------------------------------- */
+@media (max-width: 1024px) {
+  /* Kill the 1300px min-widths that force horizontal scroll */
+  .home-navbar .top-add .top-add-content,
+  .other-navbar .top-add .top-add-content,
+  .home-navbar .navbar-container .menu,
+  .other-navbar .navbar-container .menu {
+    min-width: 0 !important;
+    width: 100% !important;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  /* Tighten the oversized nav gaps set inline (4rem) */
+  .home-navbar .navbar-container .menu > div,
+  .other-navbar .navbar-container .menu > div {
+    gap: 1.5rem !important;
+  }
+}
+
+/* -----------------------------------------------------------
+   PHONES / SMALL TABLETS
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* --- Top announcement bar --- */
+  .home-navbar .top-add .top-add-content .top-content-text,
+  .other-navbar .top-add .top-add-content .top-content-text {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  /* --- Nav menu: allow wrapping, shrink gaps --- */
+  .home-navbar .navbar-container .menu,
+  .other-navbar .navbar-container .menu {
+    height: auto;
+  }
+  .home-navbar .navbar-container .menu > div,
+  .other-navbar .navbar-container .menu > div {
+    gap: 1rem !important;
+  }
+  .home-navbar .hover-line a,
+  .other-navbar .hover-line a {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  /* --- Hero header --- */
+  .home-navbar {
+    height: auto;
+    min-height: 620px;
+  }
+  .home-navbar .navbar-container .header-frame,
+  .other-navbar .navbar-container .header-frame {
+    flex-direction: column;
+    height: auto;
+    margin-top: 120px;
+    padding: 0 20px 48px;
+    box-sizing: border-box;
+  }
+  .home-navbar .navbar-container .header-frame .horizontal-text,
+  .other-navbar .navbar-container .header-frame .horizontal-text {
+    display: none;
+  }
+  .home-navbar .navbar-container .header-frame .detail,
+  .other-navbar .navbar-container .header-frame .detail {
+    width: 100%;
+    max-width: 100%;
+  }
+  .home-navbar .navbar-container .header-frame .detail .head-main-txt,
+  .other-navbar .navbar-container .header-frame .detail .head-main-txt {
+    width: 100%;
+    font-size: 36px;
+    line-height: 42px;
+  }
+  .home-navbar .navbar-container .header-frame .detail .wel-txt,
+  .other-navbar .navbar-container .header-frame .detail .wel-txt {
+    width: 100%;
+    font-size: 15px;
+  }
+  .home-navbar .navbar-container .header-frame .detail .service-txt {
+    margin-top: 30px;
+  }
+  .home-navbar .navbar-container .header-frame .detail .signup {
+    margin-top: 36px;
+  }
+
+  /* --- Featured "info banner" (Trio Blend Box) --- */
+  .homepage .static-frame .info .info-banner {
+    width: 100% !important;
+    max-width: 100%;
+    height: auto;
+    min-height: 360px;
+    padding: 32px 24px;
+    background-size: cover !important;
+    box-sizing: border-box;
+  }
+  .homepage .static-frame .info .info-title,
+  .homepage .popular-dishes-frame .popular-section .info-title,
+  .new-products-frame .main .info-title,
+  .homepage .active-users-frame .main .info-title,
+  .homepage .events-frame .events-text .info-title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  /* --- Card rows: wrap and center instead of fixed rows --- */
+  .homepage .static-frame .info .cards-wrapper,
+  .homepage .popular-dishes-frame .popular-section .cards-frame,
+  .new-products-frame .cards-wrapper,
+  .homepage .active-users-frame .cards-frame,
+  .homepage .cards-frame,
+  .homepage .events-frame .events-info {
+    width: 100% !important;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    box-sizing: border-box;
+    padding: 0 16px;
+  }
+
+  /* Individual cards go fluid */
+  .new-products-frame .card {
+    width: 300px;
+    max-width: 100%;
+  }
+  .homepage .popular-dishes-frame .popular-section .cards-frame .card {
+    min-width: 260px;
+  }
+  .homepage .active-users-frame .cards-frame .card {
+    width: 260px;
+    max-width: 100%;
+  }
+  .homepage .events-frame .events-info .events-info-frame {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* Events carousel controls */
+  .homepage .events-frame .events-main .prev-next-frame {
+    width: 100%;
+    max-width: 396px;
+  }
+  .homepage .events-frame .bott-left .text-desc {
+    width: 100%;
+    max-width: 332px;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  /* --- Footer: stack the columns --- */
+  .footer-table {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: center;
+    gap: 32px;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+  .footer-table .table,
+  .footer-table .table-last {
+    width: 100% !important;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* -----------------------------------------------------------
+   NARROW: keep the whole nav row on screen
+   ----------------------------------------------------------- */
+@media (max-width: 600px) {
+  .home-navbar .navbar-container .menu > div,
+  .other-navbar .navbar-container .menu > div {
+    gap: 0.85rem !important;
+  }
+  .home-navbar .hover-line a,
+  .other-navbar .hover-line a {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+  /* Shrink the fixed-width Login button so it never clips */
+  .home-navbar .login-button,
+  .other-navbar .login-button {
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 8px 14px !important;
+    height: 38px !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+  }
+}
+
+/* -----------------------------------------------------------
+   VERY SMALL PHONES
+   ----------------------------------------------------------- */
+@media (max-width: 420px) {
+  .home-navbar .navbar-container .header-frame .detail .head-main-txt,
+  .other-navbar .navbar-container .header-frame .detail .head-main-txt {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .home-navbar .navbar-cover .menu .brand-logo,
+  .other-navbar .navbar-cover .menu .brand-logo {
+    width: 88px;
+    height: 36px;
+  }
+}

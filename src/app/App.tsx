@@ -10,10 +10,10 @@ import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer";
 import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth";
-import Test from "./screens/Test";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
+import "../css/responsive.css";
 import { T } from "../lib/types/common";
 import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";
 import { Messages } from "../lib/config";
@@ -47,7 +47,6 @@ function App() {
       await sweetTopSuccessAlert("success", 700);
       setAuthMember(null);
     } catch (err) {
-      console.log(err);
       sweetErrorHandling(Messages.error1);
     }
   };
@@ -98,7 +97,6 @@ function App() {
         </Route>
         <Route path="/">
           <HomePage />
-          {/* <Test /> */}
         </Route>
       </Switch>
       <Footer />
