@@ -5,6 +5,8 @@ import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer";
 import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { CircularProgress } from "@mui/material";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
@@ -98,15 +100,33 @@ function App() {
           handleLogoutRequest={handleLogoutRequest}
         />
       )}
-      <Suspense fallback={null}>
-        <Routes>
-          <Route path="/products/*" element={<ProductsPage onAdd={onAdd} />} />
-          <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/member-page" element={<UserPage />} />
-          <Route path="/help" element={<HelpPage />} />
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense
+          fallback={
+            <div
+              style={{
+                minHeight: "60vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress sx={{ color: "#DB9457" }} />
+            </div>
+          }
+        >
+          <Routes>
+            <Route
+              path="/products/*"
+              element={<ProductsPage onAdd={onAdd} />}
+            />
+            <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/member-page" element={<UserPage />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
       <Footer />
 
       <AuthenticationModal
