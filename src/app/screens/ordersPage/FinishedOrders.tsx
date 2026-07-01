@@ -6,7 +6,7 @@ import { retrieveFinishedOrders } from "./selector";
 import { Order, OrderItem } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
-import moment from "moment";
+import { formatDateTime } from "../../../lib/datetime";
 
 // Selector
 const finishedOrderRetriever = createSelector(
@@ -78,7 +78,7 @@ export default function FinishedOrders() {
                     Total Paid: ${order.orderTotal}
                   </Typography>
                   <Typography fontSize={13} color="text.secondary" mt={0.5}>
-                    {moment(order.createdAt).format("YYYY-MM-DD HH:mm")}
+                    {formatDateTime(order.createdAt)}
                   </Typography>
                 </Box>
 

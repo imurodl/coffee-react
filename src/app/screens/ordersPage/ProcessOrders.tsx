@@ -11,7 +11,7 @@ import { OrderStatus } from "../../../lib/enums/order.enum";
 import { T } from "../../../lib/types/common";
 import OrderService from "../../services/OrderService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
-import moment from "moment";
+import { formatDateTime } from "../../../lib/datetime";
 
 // Use your existing selector properly
 const processOrderRetriever = createSelector(
@@ -112,7 +112,7 @@ export default function ProcessOrders({ setValue }: OrdersProps) {
                     Total: ${order.orderTotal}
                   </Typography>
                   <Typography fontSize={13} color="text.secondary" mt={0.5}>
-                    {moment(order.createdAt).format("YYYY-MM-DD HH:mm")}
+                    {formatDateTime(order.createdAt)}
                   </Typography>
                 </Box>
 

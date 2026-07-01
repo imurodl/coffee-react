@@ -1,21 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
 
 export interface IDividerProps {
-	width?: string;
-	height?: string;
-	bg?: string;
+  width?: string;
+  height?: string;
+  bg?: string;
 }
 
-const DividerComponent = styled.span<IDividerProps>`
-	display: flex;
-	min-width: ${({ width }) => `${width}px`};
-	min-height: ${({ height }) => `${height}px`};
-	background: ${({ bg }) => `${bg}`};
-`;
-
-function Divider(props: IDividerProps) {
-	return <DividerComponent {...props} />;
+function Divider({ width, height, bg }: IDividerProps) {
+  return (
+    <span
+      style={{
+        display: "flex",
+        minWidth: `${width}px`,
+        minHeight: `${height}px`,
+        background: bg,
+      }}
+    />
+  );
 }
 
 export default Divider;

@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 
-const Footers = styled.div`
+const Footers = styled("div")`
   width: 100%;
   height: auto;
   display: flex;

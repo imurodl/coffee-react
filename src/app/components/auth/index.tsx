@@ -10,7 +10,7 @@ import {
   Backdrop,
   Fade,
 } from "@mui/material";
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import LoginIcon from "@mui/icons-material/Login";
 import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
@@ -35,7 +35,7 @@ const paperSx = {
   outline: "none",
 };
 
-const ModalImage = styled.img`
+const ModalImage = styled("img")`
   width: 100%;
   height: 120px;
   object-fit: cover;
