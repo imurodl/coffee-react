@@ -113,6 +113,12 @@ export default function ChosenProduct(props: ChosenProductProps) {
       .catch(() => {});
   }, [chosenProduct]);
 
+  useEffect(() => {
+    if (chosenProduct?.productName) {
+      document.title = `${chosenProduct.productName} — Amaya Roasting Co.`;
+    }
+  }, [chosenProduct]);
+
   if (!chosenProduct) return null;
   return (
     <div className="chosen-product">
