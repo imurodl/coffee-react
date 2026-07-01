@@ -25,6 +25,17 @@ class MemberService {
     }
   }
 
+  // Verifies the httpOnly auth cookie and returns the current member, or null.
+  public async getMemberDetail(): Promise<Member | null> {
+    try {
+      const url = this.path + "/member/detail";
+      const result = await axios.get(url, { withCredentials: true });
+      return result.data;
+    } catch {
+      return null;
+    }
+  }
+
   public async getRestaurant(): Promise<Member> {
     try {
       const url = this.path + "/member/restaurant";
