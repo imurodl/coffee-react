@@ -39,7 +39,7 @@ export default function FeaturedProducts() {
             </Typography>
             <Button
               LinkComponent={"a"}
-              href="/products"
+              href="#/products"
               sx={{
                 marginTop: "45px",
                 display: "flex",
@@ -99,7 +99,7 @@ export default function FeaturedProducts() {
           <Button
             className="info-main-btn"
             LinkComponent={"a"}
-            href="/products"
+            href="#/products"
             sx={{
               display: "flex",
               width: "260px",

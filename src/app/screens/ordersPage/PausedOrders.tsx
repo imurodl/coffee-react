@@ -118,6 +118,8 @@ export default function PausedOrders({ setValue }: OrdersProps) {
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
+                  flexWrap="wrap"
+                  gap={1.5}
                 >
                   <Box fontWeight={700} fontSize={16}>
                     Total: ${order.orderTotal}

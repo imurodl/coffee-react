@@ -105,6 +105,8 @@ export default function ProcessOrders({ setValue }: OrdersProps) {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                flexWrap="wrap"
+                rowGap={1.5}
                 mt={2}
               >
                 <Box>
