@@ -107,11 +107,22 @@ img {
   .homepage .static-frame .info .info-banner {
     width: 100% !important;
     max-width: 100%;
-    height: auto;
-    min-height: 360px;
-    padding: 32px 24px;
+    height: auto !important;
+    min-height: 320px;
+    padding: 32px 24px !important;
     background-size: cover !important;
     box-sizing: border-box;
+  }
+  /* banner text blocks carry fixed desktop widths + top margins */
+  .homepage .static-frame .info .info-banner .info-banner-title {
+    margin-top: 0 !important;
+    width: 100% !important;
+    max-width: 100%;
+    font-size: 40px !important;
+  }
+  .homepage .static-frame .info .info-banner .info-banner-subt {
+    width: 100% !important;
+    max-width: 100%;
   }
   .homepage .static-frame .info .info-title,
   .homepage .popular-dishes-frame .popular-section .info-title,
@@ -215,6 +226,108 @@ img {
     width: 100% !important;
     align-items: center;
     text-align: center;
+  }
+}
+
+/* -----------------------------------------------------------
+   HOME: kill fixed card/image/section heights that leave
+   huge dead space and clip content on phones
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Featured products: fluid card, image keeps aspect ratio */
+  .homepage .static-frame .cards-wrapper .card {
+    width: 100% !important;
+    max-width: 340px;
+    height: auto !important;
+    padding: 0 12px 24px !important;
+    box-sizing: border-box;
+  }
+  .homepage .static-frame .cards-wrapper .card img {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* New products: let images size to the (narrower) card */
+  .homepage .new-products-frame .cards-wrapper .card img {
+    height: auto !important;
+  }
+
+  /* Advertisement video: drop the 693px band and the 1.5x zoom */
+  .homepage .ads-restaurant-frame {
+    height: auto !important;
+    box-shadow: none;
+  }
+  .homepage .ads-restaurant-frame .ads-video {
+    transform: none !important;
+    height: auto !important;
+  }
+
+  /* Events carousel: fit slide + image to the phone width */
+  .homepage .events-frame .events-info-frame {
+    max-width: 340px;
+  }
+  .homepage .events-frame .events-img img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* -----------------------------------------------------------
+   PRODUCTS: fluid grid + cards, and reveal the add-to-cart /
+   view controls (touch has no :hover, so they'd be invisible)
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* two fluid columns instead of a fixed 293px min track */
+  .products-page .products .list-category-section .product-wrapper {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+  }
+  .list-category-section .product-wrapper .product-card {
+    width: 100% !important;
+  }
+  .list-category-section .product-wrapper .product-card .product-img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .products-page .products .product-img img {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* no hover on touch: keep the card controls tappable */
+  .products-page .products .shop-btn,
+  .products-page .products .view-btn,
+  .products-page .products .product-left {
+    opacity: 1 !important;
+  }
+
+  /* related products (chosen product): wrap, don't overflow */
+  .products-page .chosen-product .related-products {
+    flex-wrap: wrap !important;
+    gap: 12px;
+  }
+  .products-page .chosen-product .related-products .product-card {
+    width: 100% !important;
+    max-width: 170px !important;
+  }
+  .products-page .chosen-product .related-products .product-card .product-img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .products-page .chosen-product .related-products .product-img img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 420px) {
+  /* very small screens: single column reads better */
+  .products-page .products .list-category-section .product-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  .list-category-section .product-wrapper .product-card {
+    max-width: 340px;
+    margin: 0 auto 24px;
   }
 }
 
