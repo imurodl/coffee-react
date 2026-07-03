@@ -1,6 +1,8 @@
 import React from "react";
 import { Container, Stack, Box, Typography } from "@mui/material";
 import Divider from "../../components/divider";
+import ProductCard from "../../components/ProductCard";
+import ProductGrid from "../../components/ProductGrid";
 
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -31,34 +33,22 @@ export default function NewDishes() {
           <Typography className="info-title">Now Roasting</Typography>
           <Divider width="2" height="40" bg="#DB9457" />
 
-          <Stack className="cards-wrapper">
+          <Box sx={{ width: "100%", mt: { xs: 4, md: 6 } }}>
             {newDishes.length !== 0 ? (
-              newDishes.map((product) => {
-                const imagePath = `${serverApi}/${product.productImages[0]}`;
-                const sizeVolume =
-                  product.productCollection === ProductCollection.DRINK
-                    ? `${product.productVolume}L`
-                    : `${product.productSize} size`;
-
-                return (
-                  <Box
+              <ProductGrid>
+                {newDishes.map((product) => (
+                  <ProductCard
                     key={product._id}
-                    className="card"
-                    onClick={() => choseDishHandler(product._id)}
-                  >
-                    <div className="badge">{sizeVolume}</div>
-                    <img src={imagePath} alt={product.productName} loading="lazy" />
-                    <p className="product-name">{product.productName}</p>
-                    <p className="product-price">${product.productPrice}</p>
-
-                    <div className="hidden">see product</div>
-                  </Box>
-                );
-              })
+                    product={product}
+                    onOpen={choseDishHandler}
+                    showStock={false}
+                  />
+                ))}
+              </ProductGrid>
             ) : (
               <Box className="no-data">New products are not available!</Box>
             )}
-          </Stack>
+          </Box>
         </Stack>
       </Container>
     </div>

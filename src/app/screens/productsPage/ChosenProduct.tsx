@@ -3,6 +3,8 @@ import { Container, Stack, Box, Typography } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import Divider from "../../components/divider";
+import ProductCard from "../../components/ProductCard";
+import ProductGrid from "../../components/ProductGrid";
 import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import "swiper/css";
@@ -330,65 +332,34 @@ export default function ChosenProduct(props: ChosenProductProps) {
         >
           Related products
         </Box>
-        <Stack className="related-products">
-          {relatedProducts.length > 1 ? (
-            relatedProducts
+        {relatedProducts.filter((p) => p._id !== chosenProduct._id).length >
+        0 ? (
+          <ProductGrid>
+            {relatedProducts
               .filter((product) => product._id !== chosenProduct._id)
-              .map((product: Product) => {
-                const imagePath = `${serverApi}/${product.productImages[0]}`;
-                const sizeVolume =
-                  product.productCollection === ProductCollection.DRINK
-                    ? product.productVolume + "l"
-                    : product.productSize + " size";
-                return (
-                  <Stack
-                    key={product._id}
-                    className="product-card"
-                    onClick={() => choseDishHandler(product._id)}
-                  >
-                    <Stack
-                      className="product-img"
-                      sx={{
-                        backgroundImage: `url(${imagePath})`,
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                      }}
-                    >
-                      <div className="product-sale">{sizeVolume}</div>
-                    </Stack>
-                    <Box className="product-desc">
-                      <span className="product-title">
-                        {product.productName}
-                      </span>
-                      <div className="product-desc">
-                        <MonetizationOnIcon />
-                        {product.productPrice}
-                      </div>
-                      <div className="text-hidden">SEE PRODUCT</div>
-                    </Box>
-                  </Stack>
-                );
-              })
-          ) : (
-            <Box
-              className="no-data"
-              width={"100%"}
-              height={"200px"}
-              display={"flex"}
-              alignItems={"center"}
-              textTransform={"capitalize"}
-              justifyContent={"center"}
-              fontFamily={"Poppins"}
-              fontStyle={"normal"}
-              fontWeight={"400"}
-              fontSize={"24px"}
-              lineHeight={"34px"}
-              color={"#e3c08d"}
-            >
-              Related products not found!
-            </Box>
-          )}
-        </Stack>
+              .map((product: Product) => (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  onOpen={choseDishHandler}
+                  showStock={false}
+                />
+              ))}
+          </ProductGrid>
+        ) : (
+          <Box
+            className="no-data"
+            width={"100%"}
+            height={"200px"}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            color={"#e3c08d"}
+            fontSize={"24px"}
+          >
+            Related products not found!
+          </Box>
+        )}
       </Container>
     </div>
   );

@@ -7,6 +7,8 @@ import { retrieveFeaturedProducts } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
+import ProductCard from "../../components/ProductCard";
+import ProductGrid from "../../components/ProductGrid";
 
 /** REDUC SLICE & SELECTOR */
 const featuredProductsRetriever = createSelector(
@@ -71,31 +73,22 @@ export default function FeaturedProducts() {
               open the box
             </Button>
           </Stack>
-          <Stack
-            className="cards-wrapper"
-            flexDirection={"row"}
-            sx={{ mt: "48px" }}
-          >
+          <Box sx={{ width: "100%", mt: { xs: 4, md: 6 } }}>
             {featuredProducts.length !== 0 ? (
-              featuredProducts.map((product: Product) => {
-                const imagePath = `${serverApi}/${product.productImages[0]}`;
-                return (
-                  <Box
-                    className="card"
-                    id={product._id}
-                    onClick={() => choseDishHandler(product._id)}
-                  >
-                    <img src={imagePath} alt={product.productName} loading="lazy" />
-                    <p>{product?.productName}</p>
-                    <div>$ {product?.productPrice}</div>
-                    <div className="hidden">see product</div>
-                  </Box>
-                );
-              })
+              <ProductGrid>
+                {featuredProducts.map((product: Product) => (
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    onOpen={choseDishHandler}
+                    showStock={false}
+                  />
+                ))}
+              </ProductGrid>
             ) : (
               <Box className="no-data">Featured products are not available!</Box>
             )}
-          </Stack>
+          </Box>
           <Button
             className="info-main-btn"
             LinkComponent={"a"}

@@ -29,7 +29,10 @@
 }
 
 .home-navbar .top-add .top-add-content {
-  min-width: 1300px;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 24px;
+  box-sizing: border-box;
   height: 42px;
   display: flex;
   justify-content: space-between;
@@ -66,7 +69,10 @@
 }
 
 .home-navbar .navbar-container .menu {
-  min-width: 1300px;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 24px;
+  box-sizing: border-box;
   height: 50px;
   z-index: 10000;
 }
@@ -244,7 +250,10 @@
 }
 
 .other-navbar .top-add .top-add-content {
-  min-width: 1300px;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 24px;
+  box-sizing: border-box;
   height: 42px;
   display: flex;
   justify-content: space-between;
@@ -275,7 +284,10 @@
 }
 
 .other-navbar .navbar-container .menu {
-  min-width: 1300px;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 24px;
+  box-sizing: border-box;
   height: 50px;
   z-index: 10000;
 }
