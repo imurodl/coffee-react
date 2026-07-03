@@ -20,6 +20,8 @@ import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ProductCard from "../../components/ProductCard";
+import ProductGrid from "../../components/ProductGrid";
 
 /** REDUC SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -324,99 +326,20 @@ export default function Products(props: ProductProps) {
               </div>
             </Stack>
 
-            <Stack
-              className="product-wrapper"
-              sx={{ display: products.length !== 0 ? "grid" : "flex" }}
-            >
-              {products.length !== 0 ? (
-                products.map((product: Product) => {
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
-                  const sizeVolume =
-                    product.productCollection === ProductCollection.DRINK
-                      ? product.productVolume + "l"
-                      : product.productSize + " size";
-                  return (
-                    <Stack
-                      key={product._id}
-                      className="product-card"
-                      role="button"
-                      tabIndex={0}
-                      aria-label={product.productName}
-                      onClick={() => choseDishHandler(product._id)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          choseDishHandler(product._id);
-                        }
-                      }}
-                    >
-                      <Stack
-                        className="product-img"
-                        role="img"
-                        aria-label={product.productName}
-                        sx={{
-                          backgroundImage: `url(${imagePath})`,
-                          backgroundRepeat: "no-repeat",
-                          backgroundSize: "cover",
-                        }}
-                      >
-                        <div className="product-sale">{sizeVolume}</div>
-                        <Box
-                          className="product-left"
-                          sx={{
-                            background:
-                              product.productLeftCount > 5
-                                ? "#10102079"
-                                : "red",
-                          }}
-                        >
-                          {product.productLeftCount} products left
-                        </Box>
-                        <Button
-                          className="shop-btn"
-                          onClick={(e) => {
-                            onAdd({
-                              _id: product._id,
-                              quantity: 1,
-                              price: product.productPrice,
-                              image: product.productImages[0],
-                              name: product.productName,
-                            });
-                            e.stopPropagation();
-                          }}
-                        >
-                          <ShoppingCartIcon />
-                        </Button>
-                        <Button className="view-btn" sx={{ right: "36px" }}>
-                          <Badge
-                            badgeContent={product.productViews}
-                            color="secondary"
-                          >
-                            <RemoveRedEyeIcon
-                              sx={{
-                                color:
-                                  product.productViews === 0 ? "gray" : "white",
-                              }}
-                            />
-                          </Badge>
-                        </Button>
-                      </Stack>
-                      <Box className="product-desc">
-                        <span className="product-title">
-                          {product.productName}
-                        </span>
-                        <div className="product-desc">
-                          <MonetizationOnIcon />
-                          {product.productPrice}
-                        </div>
-                      </Box>
-                    </Stack>
-                  );
-                })
-              ) : (
-                <Box className="no-data">Products are not available!</Box>
-              )}
-            </Stack>
+            {products.length !== 0 ? (
+              <ProductGrid>
+                {products.map((product: Product) => (
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    onOpen={choseDishHandler}
+                    onAdd={onAdd}
+                  />
+                ))}
+              </ProductGrid>
+            ) : (
+              <Box className="no-data">Products are not available!</Box>
+            )}
           </Stack>
           <Stack className="pagination-section">
             <Pagination

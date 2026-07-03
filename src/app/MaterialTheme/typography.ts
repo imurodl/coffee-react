@@ -1,21 +1,28 @@
+const heading = '"Playfair Display", Georgia, serif';
+
 export default {
+	fontFamily: '"Raleway", "Helvetica Neue", Arial, sans-serif',
 	h1: {
-		fontWeight: 500,
+		fontFamily: heading,
+		fontWeight: 600,
 		fontSize: 35,
 		letterSpacing: '-0.24px',
 	},
 	h2: {
-		fontWeight: 500,
+		fontFamily: heading,
+		fontWeight: 600,
 		fontSize: 29,
 		letterSpacing: '-0.24px',
 	},
 	h3: {
-		fontWeight: 500,
+		fontFamily: heading,
+		fontWeight: 600,
 		fontSize: 24,
 		letterSpacing: '-0.06px',
 	},
 	h4: {
-		fontWeight: 500,
+		fontFamily: heading,
+		fontWeight: 600,
 		fontSize: 20,
 		letterSpacing: '-0.06px',
 	},
