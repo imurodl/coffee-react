@@ -3,6 +3,7 @@ import { Container, Stack, Box, Typography } from "@mui/material";
 import Divider from "../../components/divider";
 import ProductCard from "../../components/ProductCard";
 import ProductGrid from "../../components/ProductGrid";
+import SectionHeader from "../../components/SectionHeader";
 
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -29,9 +30,7 @@ export default function NewDishes() {
     <div className="new-products-frame">
       <Container>
         <Stack className="main">
-          <Typography className="info-subt">fresh menu</Typography>
-          <Typography className="info-title">Now Roasting</Typography>
-          <Divider width="2" height="40" bg="#DB9457" />
+          <SectionHeader subtitle="fresh menu" title="Now Roasting" />
 
           <Box sx={{ width: "100%", mt: { xs: 4, md: 6 } }}>
             {newDishes.length !== 0 ? (

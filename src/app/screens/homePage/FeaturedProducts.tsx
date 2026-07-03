@@ -9,6 +9,8 @@ import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../../components/ProductCard";
 import ProductGrid from "../../components/ProductGrid";
+import SectionHeader from "../../components/SectionHeader";
+import CtaButton from "../../components/CtaButton";
 
 /** REDUC SLICE & SELECTOR */
 const featuredProductsRetriever = createSelector(
@@ -28,9 +30,7 @@ export default function FeaturedProducts() {
     <div className="static-frame">
       <Container>
         <Stack className="info">
-          <Typography className="info-subt">featured products</Typography>
-          <Typography className="info-title">Our Coffee</Typography>
-          <Divider width="2" height="40" bg="#DB9457" />
+          <SectionHeader subtitle="featured products" title="Our Coffee" />
           <Stack className="info-banner">
             <Typography className="info-banner-title">
               Trio Blend Box
@@ -89,39 +89,9 @@ export default function FeaturedProducts() {
               <Box className="no-data">Featured products are not available!</Box>
             )}
           </Box>
-          <Button
-            className="info-main-btn"
-            LinkComponent={"a"}
-            href="#/products"
-            sx={{
-              display: "flex",
-              width: "260px",
-              height: "43.75px",
-              padding: "13px 40px 14.75px 40px",
-              justifyContent: "center",
-              alignItems: "center",
-              flexShrink: 0,
-              border: "2px solid #DB9457",
-              backgroundColor: "transparent",
-              color: "#242434",
-              fontFamily: "Raleway",
-              fontSize: "13.6px",
-              fontStyle: "normal",
-              fontWeight: 600,
-              lineHeight: "29.75px",
-              letterSpacing: "2px",
-              textTransform: "uppercase",
-              textAlign: "center",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                backgroundColor: "#DB9457",
-                color: "#FFFFFF",
-                borderColor: "#DB9457",
-              },
-            }}
-          >
+          <CtaButton LinkComponent={"a"} href="#/products" sx={{ mt: 4 }}>
             shop all coffee
-          </Button>
+          </CtaButton>
         </Stack>
       </Container>
     </div>
