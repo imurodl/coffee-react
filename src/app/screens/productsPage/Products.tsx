@@ -327,7 +327,7 @@ export default function Products(props: ProductProps) {
             </Stack>
 
             {products.length !== 0 ? (
-              <ProductGrid>
+              <ProductGrid sx={{ mt: { xs: 3, md: 5 } }}>
                 {products.map((product: Product) => (
                   <ProductCard
                     key={product._id}
