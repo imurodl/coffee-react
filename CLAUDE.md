@@ -13,9 +13,9 @@ Storefront SPA for Amaya Roasting Co. Companion backend: the `coffee` repo.
 - `yarn dev` / `yarn start` — dev server on :3000
 - `yarn build` — production build to `./build` (the path nginx serves)
 - `yarn preview` — serve the built bundle
-- `yarn typecheck` — `tsc --noEmit`
-
-There is no test runner configured yet.
+- `yarn typecheck` — `tsc --noEmit` (note: currently reports pre-existing errors
+  from the `process.env` shim; not in the deploy path since `vite build` uses esbuild)
+- `yarn test` — `vitest run` (unit tests for pure logic, e.g. `src/lib/cart.ts`)
 
 ## Layout
 - `src/app/screens/` — page components (homePage, productsPage, ordersPage, userPage, …)
