@@ -74,6 +74,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!productId) return;
     const product = new ProductService();
 
     // First load main product

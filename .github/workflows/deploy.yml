@@ -27,6 +27,9 @@ jobs:
       - name: Unit tests
         run: yarn test
 
+      - name: Type-check
+        run: yarn typecheck
+
       - name: Build
         run: CI=false yarn build
         env:
