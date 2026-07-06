@@ -16,8 +16,6 @@ import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";
 import { Messages } from "../lib/config";
 import MemberService from "./services/MemberService";
 import { useGlobals } from "./hooks/useGlobals";
-import "@fontsource/playfair-display";
-import "@fontsource/raleway";
 
 // Route-level code splitting: each screen loads as its own chunk.
 const HomePage = lazy(() => import("./screens/homePage"));
